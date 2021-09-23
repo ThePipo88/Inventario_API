@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.una.inventario.dto.*;
 import org.una.inventario.entities.*;
 import org.una.inventario.exceptions.NotFoundInformationException;
-import org.una.inventario.repositories.IActivoAsignadoRepository;
 import org.una.inventario.repositories.IActivoRepository;
 import org.una.inventario.utils.MapperUtils;
 

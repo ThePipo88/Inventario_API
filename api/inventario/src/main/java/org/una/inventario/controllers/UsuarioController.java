@@ -12,6 +12,7 @@ import org.una.inventario.dto.AuthenticationResponse;
 import org.una.inventario.dto.DepartamentoDTO;
 import org.una.inventario.dto.UsuarioDTO;
 import org.una.inventario.entities.Departamento;
+import org.una.inventario.exceptions.InvalidCredentialsException;
 import org.una.inventario.exceptions.MissingInputsException;
 import org.una.inventario.services.IUsuarioService;
 
@@ -62,16 +63,15 @@ public class UsuarioController {
     public ResponseEntity<?> login(@Valid @RequestBody AuthenticationRequest authenticationRequest, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) { throw new MissingInputsException();  }
         AuthenticationResponse authenticationResponse = new AuthenticationResponse();
-        String token = usuarioService.login(authenticationRequest);
-        if (!token.isBlank()) {
-            authenticationResponse.setJwt(token);
+        AuthenticationResponse token = usuarioService.login(authenticationRequest);
+        if (token.getJwt() != null) {
+            authenticationResponse.setJwt(token.getJwt());
             //TODO: Complete this   authenticationResponse.setUsuario(usuario);
             //TODO: Complete this    authenticationResponse.setPermisos(permisosOtorgados);
             return new ResponseEntity(authenticationResponse, HttpStatus.OK);
         } else {
-            return null;
+            throw new InvalidCredentialsException();
         }
-
     }
 
     @ApiOperation(value = "Obtiene una usuario a partir de su cedula", response = UsuarioDTO.class, tags = "Usuarios")
