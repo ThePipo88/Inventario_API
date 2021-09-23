@@ -99,6 +99,7 @@ public class UsuarioServiceImplementation implements IUsuarioService, UserDetail
     public Optional<UsuarioDTO> update(UsuarioDTO usuarioDTO, Long id) {
         if (usuarioRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
         return Optional.ofNullable(getSavedUsuarioDTO(usuarioDTO));
+
     }
 
     @Override
@@ -113,6 +114,7 @@ public class UsuarioServiceImplementation implements IUsuarioService, UserDetail
         usuarioRepository.deleteAll();
     }
 
+    /*
     @Override
     @Transactional(readOnly = true)
     public AuthenticationResponse login(AuthenticationRequest authenticationRequest) {
@@ -135,7 +137,7 @@ public class UsuarioServiceImplementation implements IUsuarioService, UserDetail
             throw new InvalidCredentialsException();
         }
     }
-
+   */
     @Override
     @Transactional(readOnly = true)
     public Optional<UsuarioDTO> findById(Long id) {

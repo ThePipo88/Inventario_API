@@ -12,6 +12,7 @@ import org.una.inventario.dto.AuthenticationResponse;
 import org.una.inventario.dto.UsuarioDTO;
 import org.una.inventario.exceptions.InvalidCredentialsException;
 import org.una.inventario.exceptions.MissingInputsException;
+import org.una.inventario.services.IAutenticacionService;
 import org.una.inventario.services.IUsuarioService;
 
 import javax.validation.Valid;
@@ -22,7 +23,7 @@ import javax.validation.Valid;
 public class AutenticacionController {
 
     @Autowired
-    private IUsuarioService usuarioService;
+    private IAutenticacionService auntenticacionService;
 
     @ApiOperation(value = "Inicio de sesión para conseguir un token de acceso", response = UsuarioDTO.class, tags = "Seguridad")
     @PostMapping("/login")
@@ -30,7 +31,7 @@ public class AutenticacionController {
     public ResponseEntity<?> login(@Valid @RequestBody AuthenticationRequest authenticationRequest, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) { throw new MissingInputsException();  }
         AuthenticationResponse authenticationResponse = new AuthenticationResponse();
-        AuthenticationResponse token = usuarioService.login(authenticationRequest);
+        AuthenticationResponse token = auntenticacionService.login(authenticationRequest);
         if (token.getJwt() != null) {
             authenticationResponse.setJwt(token.getJwt());
             //TODO: Complete this   authenticationResponse.setUsuario(usuario);
@@ -40,5 +41,4 @@ public class AutenticacionController {
             throw new InvalidCredentialsException();
         }
     }
-
 }
