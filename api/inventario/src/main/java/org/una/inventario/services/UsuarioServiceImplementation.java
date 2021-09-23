@@ -99,7 +99,6 @@ public class UsuarioServiceImplementation implements IUsuarioService, UserDetail
     public Optional<UsuarioDTO> update(UsuarioDTO usuarioDTO, Long id) {
         if (usuarioRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
         return Optional.ofNullable(getSavedUsuarioDTO(usuarioDTO));
-
     }
 
     @Override
