@@ -114,6 +114,7 @@ public class UsuarioServiceImplementation implements IUsuarioService, UserDetail
         usuarioRepository.deleteAll();
     }
 
+    /*
     @Override
     @Transactional(readOnly = true)
     public AuthenticationResponse login(AuthenticationRequest authenticationRequest) {
@@ -136,7 +137,7 @@ public class UsuarioServiceImplementation implements IUsuarioService, UserDetail
             throw new InvalidCredentialsException();
         }
     }
-
+   */
     @Override
     @Transactional(readOnly = true)
     public Optional<UsuarioDTO> findById(Long id) {

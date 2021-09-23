@@ -5,6 +5,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.una.inventario.dto.AuthenticationRequest;
@@ -25,6 +26,9 @@ public class AutenticacionServiceImplementation implements IAutenticacionService
     private IUsuarioService usuarioService;
 
     @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
     private AuthenticationManager authenticationManager;
 
     @Autowired
@@ -33,7 +37,8 @@ public class AutenticacionServiceImplementation implements IAutenticacionService
     @Override
     @Transactional(readOnly = true)
     public AuthenticationResponse login(AuthenticationRequest authenticationRequest) {
-        Optional<Usuario> usuario = Optional.ofNullable(usuarioRepository.findByCedula(authenticationRequest.getCedula()));
+
+        Optional<UsuarioDTO> usuario = usuarioService.findByCedula(authenticationRequest.getCedula());
 
         if (usuario.isPresent() &&  bCryptPasswordEncoder.matches(authenticationRequest.getPassword(),usuario.get().getPasswordEncriptado())) {
             AuthenticationResponse authenticationResponse = new AuthenticationResponse();
