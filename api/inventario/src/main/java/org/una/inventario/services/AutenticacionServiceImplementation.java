@@ -5,7 +5,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.una.inventario.dto.AuthenticationRequest;
@@ -29,20 +28,17 @@ public class AutenticacionServiceImplementation implements IAutenticacionService
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    @Autowired
     private JwtProvider jwtProvider;
 
     @Override
     @Transactional(readOnly = true)
     public AuthenticationResponse login(AuthenticationRequest authenticationRequest) {
-
-        Optional<UsuarioDTO> usuario = usuarioService.findByCedula(authenticationRequest.getCedula());
+        Optional<Usuario> usuario = Optional.ofNullable(usuarioRepository.findByCedula(authenticationRequest.getCedula()));
 
         if (usuario.isPresent() &&  bCryptPasswordEncoder.matches(authenticationRequest.getPassword(),usuario.get().getPasswordEncriptado())) {
             AuthenticationResponse authenticationResponse = new AuthenticationResponse();
-            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getCedula(), authenticationRequest.getPassword()));
+            Authentication authentication = authenticationManager
+                    .authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getCedula(), authenticationRequest.getPassword()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
             authenticationResponse.setJwt(jwtProvider.generateToken(authenticationRequest));

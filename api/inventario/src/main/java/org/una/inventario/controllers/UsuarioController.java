@@ -79,6 +79,7 @@ public class UsuarioController {
     public ResponseEntity<?> findByCedulaAproximate(@PathVariable(value = "term") String term) {
         Optional<List<UsuarioDTO>> result = usuarioService.findByCedulaAproximate(term);
         return new ResponseEntity<>(result, HttpStatus.OK);
+
     }
 
     @ApiOperation(value = "Obtiene una lista de usuarios a partir de su departamento",responseContainer = "List", response = UsuarioDTO.class, tags = "Usuarios")
