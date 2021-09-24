@@ -17,7 +17,10 @@ public class DepartamentoDTO {
     private Long id;
     private String nombre;
     private boolean estado;
+<<<<<<< HEAD
    // private List<Usuario> usuarios;
+=======
+>>>>>>> main
     private Date fechaRegistro;
     private Date fechaModificacion;
 }

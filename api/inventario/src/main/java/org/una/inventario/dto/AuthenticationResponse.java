@@ -4,6 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+<<<<<<< HEAD
+=======
+import org.una.inventario.dto.RolDTO;
+import org.una.inventario.dto.UsuarioDTO;
+>>>>>>> main
 
 @Data
 @AllArgsConstructor
@@ -16,4 +21,7 @@ public class AuthenticationResponse {
     private RolDTO rolDTO;
 
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> main

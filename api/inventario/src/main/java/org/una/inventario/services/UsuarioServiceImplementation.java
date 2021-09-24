@@ -15,12 +15,19 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+<<<<<<< HEAD
 import org.una.inventario.dto.AuthenticationRequest;
 import org.una.inventario.dto.AuthenticationResponse;
 import org.una.inventario.dto.DepartamentoDTO;
 import org.una.inventario.dto.UsuarioDTO;
 import org.una.inventario.entities.Departamento;
 import org.una.inventario.entities.Usuario;
+=======
+import org.una.inventario.dto.*;
+import org.una.inventario.entities.Departamento;
+import org.una.inventario.entities.Usuario;
+import org.una.inventario.exceptions.InvalidCredentialsException;
+>>>>>>> main
 import org.una.inventario.exceptions.NotFoundInformationException;
 import org.una.inventario.jwt.JwtProvider;
 import org.una.inventario.repositories.IUsuarioRepository;
@@ -53,7 +60,10 @@ public class UsuarioServiceImplementation implements IUsuarioService, UserDetail
         return Optional.ofNullable(usuarioDTOList);
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
     @Override
     @Transactional(readOnly = true)
     public Optional<UsuarioDTO> findNombreCompletoWithLikeSQL(@Param("nombreCompleto")String nombreCompleto) {
@@ -117,6 +127,7 @@ public class UsuarioServiceImplementation implements IUsuarioService, UserDetail
         usuarioRepository.deleteAll();
     }
 
+<<<<<<< HEAD
 
     public Optional<UsuarioDTO> login(String cedula, String password) {
         return Optional.empty();
@@ -132,6 +143,32 @@ public class UsuarioServiceImplementation implements IUsuarioService, UserDetail
     }
 
 
+=======
+    /*
+    @Override
+    @Transactional(readOnly = true)
+    public AuthenticationResponse login(AuthenticationRequest authenticationRequest) {
+
+        Optional<Usuario> usuario = Optional.ofNullable(usuarioRepository.findByCedula(authenticationRequest.getCedula()));
+
+        if (usuario.isPresent() &&  bCryptPasswordEncoder.matches(authenticationRequest.getPassword(),usuario.get().getPasswordEncriptado())) {
+            AuthenticationResponse authenticationResponse = new AuthenticationResponse();
+            Authentication authentication = authenticationManager
+                    .authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getCedula(), authenticationRequest.getPassword()));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            authenticationResponse.setJwt(jwtProvider.generateToken(authenticationRequest));
+            UsuarioDTO usuarioDto = MapperUtils.DtoFromEntity(usuario.get(), UsuarioDTO.class);
+            authenticationResponse.setUsuarioDTO(usuarioDto);
+            authenticationResponse.setRolDTO(RolDTO.builder().nombre(usuarioDto.getRol().getNombre()).build());
+
+            return authenticationResponse;
+        } else {
+            throw new InvalidCredentialsException();
+        }
+    }
+   */
+>>>>>>> main
     @Override
     @Transactional(readOnly = true)
     public Optional<UsuarioDTO> findById(Long id) {
@@ -171,9 +208,14 @@ public class UsuarioServiceImplementation implements IUsuarioService, UserDetail
         if (usuarioBuscado.isPresent()) {
             Usuario usuario = usuarioBuscado.get();
             List<GrantedAuthority> roles = new ArrayList<>();
+<<<<<<< HEAD
             roles.add(new SimpleGrantedAuthority("ADMIN"));
             UserDetails userDetails = new User(usuario.getCedula(), usuario.getPasswordEncriptado(), roles);
             return userDetails;
+=======
+            roles.add(new SimpleGrantedAuthority(usuario.getRol().getNombre()));
+            return new User(usuario.getCedula(), usuario.getPasswordEncriptado(), roles);
+>>>>>>> main
         } else {
             throw new UsernameNotFoundException("Username not found, check your request");
         }

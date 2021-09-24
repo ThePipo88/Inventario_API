@@ -23,7 +23,11 @@ public class DepartamentoServiceImplementation implements IDepartamentoService{
 
     @Override
     @Transactional(readOnly = true)
+<<<<<<< HEAD
     public Optional<DepartamentoDTO> findById(Long id) { /**/
+=======
+    public Optional<DepartamentoDTO> findById(Long id) {
+>>>>>>> main
         Optional<Departamento> departamento = departamentoRepository.findById(id);
         if (departamento.isEmpty()) throw new NotFoundInformationException();
 
@@ -42,7 +46,11 @@ public class DepartamentoServiceImplementation implements IDepartamentoService{
     }
 
     @Override
+<<<<<<< HEAD
     @Transactional(readOnly = true) /**/
+=======
+    @Transactional(readOnly = true)
+>>>>>>> main
     public Optional<List<DepartamentoDTO>> findByEstado(Boolean estado) {
         List<Departamento> departamentoList = departamentoRepository.findByEstado(estado);
         List<DepartamentoDTO> departamentoDTOList = MapperUtils.DtoListFromEntityList(departamentoList, DepartamentoDTO.class);
@@ -51,20 +59,32 @@ public class DepartamentoServiceImplementation implements IDepartamentoService{
 
     @Override
     @Transactional(readOnly = true)
+<<<<<<< HEAD
     public Optional<List<DepartamentoDTO>> findAll() { /**/
 
+=======
+    public Optional<List<DepartamentoDTO>> findAll() {
+>>>>>>> main
         List<DepartamentoDTO> departamentoDTOList = MapperUtils.DtoListFromEntityList(departamentoRepository.findAll(), DepartamentoDTO.class);
         return Optional.ofNullable(departamentoDTOList);
     }
 
     @Override
+<<<<<<< HEAD
     @Transactional /**/
+=======
+    @Transactional
+>>>>>>> main
     public Optional<DepartamentoDTO> create(DepartamentoDTO departamentoDTO) {
         return Optional.ofNullable(getSavedDepartamentoDTO(departamentoDTO));
     }
 
     @Override
+<<<<<<< HEAD
     @Transactional /**/
+=======
+    @Transactional
+>>>>>>> main
     public Optional<DepartamentoDTO> update(DepartamentoDTO departamentoDTO, Long id) {
         if (departamentoRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
 

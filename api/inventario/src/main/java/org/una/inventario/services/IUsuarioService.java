@@ -28,7 +28,11 @@ public interface IUsuarioService {
 
     public Optional<UsuarioDTO> findNombreCompletoWithLikeSQL(@Param("nombreCompleto")String nombreCompleto);
 
+<<<<<<< HEAD
     public Optional<List<DepartamentoDTO>>  findByDepartamentoId(Long id);
+=======
+    public Optional<List<DepartamentoDTO>> findByDepartamentoId(Long id);
+>>>>>>> main
 
     public Optional<UsuarioDTO> create(UsuarioDTO usuarioDTO);
 
@@ -40,5 +44,9 @@ public interface IUsuarioService {
 
     public void deleteAll();
 
+<<<<<<< HEAD
     public String login(AuthenticationRequest authenticationRequest);
+=======
+    //public AuthenticationResponse login(AuthenticationRequest authenticationRequest);
+>>>>>>> main
 }

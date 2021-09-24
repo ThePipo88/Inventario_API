@@ -31,7 +31,10 @@ public class DepartamentoController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
     @ApiOperation(value = "Obtiene un departamento a partir de su id", response = DepartamentoDTO.class,  responseContainer = "List", tags = "Departamento")
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
@@ -39,7 +42,10 @@ public class DepartamentoController {
         return new ResponseEntity<>(departamentoFound, HttpStatus.OK);
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
     @ApiOperation(value = "Obtiene un departamento a partir de su nombre", response = DepartamentoDTO.class, tags = "Departamento")
     @GetMapping("/nombre/{term}")
     public ResponseEntity<?> findByNombreContainingAproximateIgnoreCase(@PathVariable(value = "term") String term) {
@@ -48,7 +54,11 @@ public class DepartamentoController {
     }
 
 
+<<<<<<< HEAD
     @ApiOperation(value = "Obtiene un departamento a partir de su estado", response = DepartamentoDTO.class, tags = "Departamento")
+=======
+    @ApiOperation(value = "Obtiene un departamento a partir de su estado", response = DepartamentoDTO.class,responseContainer = "List", tags = "Departamento")
+>>>>>>> main
     @GetMapping("/{estado}")
     public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") Boolean estado) {
         Optional<List<DepartamentoDTO>> result = departamentoService.findByEstado(estado);

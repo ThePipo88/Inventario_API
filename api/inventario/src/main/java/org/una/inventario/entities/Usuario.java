@@ -29,7 +29,10 @@ public class Usuario implements Serializable {
     @Column(length = 25, unique = true)
     private String cedula;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
     @ManyToOne
     @JoinColumn(name="departamentos_id")
     private Departamento departamento;
@@ -40,11 +43,15 @@ public class Usuario implements Serializable {
     @ManyToOne
     @JoinColumn(name="roles_id")
     private Rol rol;
+<<<<<<< HEAD
     /*
     @ManyToOne
     @JoinColumn(name="departamentos_id")
     private Long departamento;
      */
+=======
+
+>>>>>>> main
     @Column(name = "fecha_registro", updatable = false)
     @Temporal(TemporalType.DATE)
     @Setter(AccessLevel.NONE)

@@ -1,6 +1,9 @@
 package org.una.inventario.components;
 
+<<<<<<< HEAD
 import lombok.Builder;
+=======
+>>>>>>> main
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
@@ -14,8 +17,13 @@ import org.una.inventario.services.IRolService;
 import org.una.inventario.services.IUsuarioService;
 
 import java.util.List;
+<<<<<<< HEAD
 import java.util.Optional;
 import java.lang.String;
+=======
+import java.util.Objects;
+import java.util.Optional;
+>>>>>>> main
 
 @Component
 public class DataLoader implements ApplicationRunner {
@@ -35,19 +43,38 @@ public class DataLoader implements ApplicationRunner {
     @Autowired
     private IDepartamentoService departamentoService;
 
+<<<<<<< HEAD
 
     @Override
     public void run(ApplicationArguments args) {
         if (usuarioService.findByCedulaAproximate(cedula).isEmpty()) {
+=======
+    @Override
+    public void run(ApplicationArguments args) {
+
+
+        if(usuarioService.findByCedulaAproximate(cedula).get().size() == 0){
+            System.out.println("Se metio aqui");
+
+>>>>>>> main
             Optional<DepartamentoDTO> contabilidadDepartamento = departamentoService.create(DepartamentoDTO.builder().nombre("Contabilidad").build());
             Optional<DepartamentoDTO> cajasDepartamento = departamentoService.create(DepartamentoDTO.builder().nombre("Cajas").build());
             Optional<DepartamentoDTO> informaticaDepartamento = departamentoService.create(DepartamentoDTO.builder().nombre("Informatica").build());
 
+<<<<<<< HEAD
             Optional<RolDTO> colaboradorRol = Optional.ofNullable(rolService.create(RolDTO.builder().nombre("Colaborador").build()));
             Optional<RolDTO> auditorRol = Optional.ofNullable(rolService.create(RolDTO.builder().nombre("Auditor").build()));
             Optional<RolDTO> contadorRol = Optional.ofNullable(rolService.create(RolDTO.builder().nombre("Contador").build()));
             Optional<RolDTO> usuarioRol = Optional.ofNullable(rolService.create(RolDTO.builder().nombre("Usuario").build()));
             Optional<RolDTO> administradorRol = Optional.ofNullable(rolService.create(RolDTO.builder().nombre("Administrador").build()));
+=======
+            Optional<RolDTO> colaboradorRol = Optional.ofNullable(rolService.create(RolDTO.builder().nombre(RolesTypes.COLABORADOR.name()).build()));
+            Optional<RolDTO> auditorRol = Optional.ofNullable(rolService.create(RolDTO.builder().nombre(RolesTypes.AUDITOR.name()).build()));
+            Optional<RolDTO> contadorRol = Optional.ofNullable(rolService.create(RolDTO.builder().nombre(RolesTypes.CONTADOR.name()).build()));
+            Optional<RolDTO> usuarioRol = Optional.ofNullable(rolService.create(RolDTO.builder().nombre(RolesTypes.USUARIO.name()).build()));
+            Optional<RolDTO> administradorRol = Optional.ofNullable(rolService.create(RolDTO.builder().nombre(RolesTypes.ADMINISTRADOR.name()).build()));
+
+>>>>>>> main
 
             UsuarioDTO cajeroUsuario = UsuarioDTO.builder()
                     .cedula("0123456789")
@@ -75,6 +102,7 @@ public class DataLoader implements ApplicationRunner {
             usuarioService.create(administradorUsuario);
 
             System.out.println("Se agrega el usuario inicial a la aplicación");
+<<<<<<< HEAD
         }else {
             System.out.println("Se encontro el usuario administrador, continuando...");
 
@@ -107,8 +135,15 @@ public class DataLoader implements ApplicationRunner {
             else{
                 System.out.println("Usuario existente");
             }
+=======
+        }else{
+            System.out.println("Usuario existente");
+>>>>>>> main
         }
     }
 
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> main

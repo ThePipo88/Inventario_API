@@ -69,4 +69,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return super.authenticationManager();
     }
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> main

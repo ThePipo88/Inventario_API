@@ -45,7 +45,10 @@ public class Departamento implements Serializable {
 
     @PrePersist
     public void prePersist() {
+<<<<<<< HEAD
         estado=true;
+=======
+>>>>>>> main
         fechaRegistro = new Date();
         fechaModificacion = new Date();
     }

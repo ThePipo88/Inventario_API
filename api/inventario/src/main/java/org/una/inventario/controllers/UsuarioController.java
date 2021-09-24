@@ -12,6 +12,10 @@ import org.una.inventario.dto.AuthenticationResponse;
 import org.una.inventario.dto.DepartamentoDTO;
 import org.una.inventario.dto.UsuarioDTO;
 import org.una.inventario.entities.Departamento;
+<<<<<<< HEAD
+=======
+import org.una.inventario.exceptions.InvalidCredentialsException;
+>>>>>>> main
 import org.una.inventario.exceptions.MissingInputsException;
 import org.una.inventario.services.IUsuarioService;
 
@@ -27,6 +31,7 @@ public class UsuarioController {
     @Autowired
     private IUsuarioService usuarioService;
 
+<<<<<<< HEAD
    /*
 
    Son ejemplos de los anteriores
@@ -66,6 +71,8 @@ public class UsuarioController {
     }
     */
 
+=======
+>>>>>>> main
     @ApiOperation(value = "Obtiene una lista de todos los Usuarios", response = UsuarioDTO.class, responseContainer = "List", tags = "Usuarios")
     @GetMapping()
     public @ResponseBody
@@ -88,24 +95,48 @@ public class UsuarioController {
         return new ResponseEntity<>(usuarioFound, HttpStatus.OK);
     }
 
+<<<<<<< HEAD
+=======
+    @ApiOperation(value = "Obtiene un usuario a partir de su cedula", response = UsuarioDTO.class, tags = "Usuarios")
+    @GetMapping("/byCedula/{cedula}")
+    public ResponseEntity<?> findByCedula(@PathVariable(value = "cedula") String cedula) {
+        Optional<UsuarioDTO> usuarioFound = usuarioService.findByCedula(cedula);
+        return new ResponseEntity<>(usuarioFound, HttpStatus.OK);
+    }
+
+    /*
+>>>>>>> main
     @ApiOperation(value = "Inicio de sesión para conseguir un token de acceso", response = UsuarioDTO.class, tags = "Seguridad")
     @PostMapping("/login")
     @ResponseBody
     public ResponseEntity<?> login(@Valid @RequestBody AuthenticationRequest authenticationRequest, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) { throw new MissingInputsException();  }
         AuthenticationResponse authenticationResponse = new AuthenticationResponse();
+<<<<<<< HEAD
         String token = usuarioService.login(authenticationRequest);
         if (!token.isBlank()) {
             authenticationResponse.setJwt(token);
+=======
+        AuthenticationResponse token = usuarioService.login(authenticationRequest);
+        if (token.getJwt() != null) {
+            authenticationResponse.setJwt(token.getJwt());
+>>>>>>> main
             //TODO: Complete this   authenticationResponse.setUsuario(usuario);
             //TODO: Complete this    authenticationResponse.setPermisos(permisosOtorgados);
             return new ResponseEntity(authenticationResponse, HttpStatus.OK);
         } else {
+<<<<<<< HEAD
             return null;
         }
 
     }
 
+=======
+            throw new InvalidCredentialsException();
+        }
+    }
+*/
+>>>>>>> main
     @ApiOperation(value = "Obtiene una usuario a partir de su cedula", response = UsuarioDTO.class, tags = "Usuarios")
     @GetMapping("/cedula/{term}")
     public ResponseEntity<?> findByCedulaAproximate(@PathVariable(value = "term") String term) {
@@ -168,6 +199,7 @@ public class UsuarioController {
          usuarioService.deleteAll();
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
+<<<<<<< HEAD
 
     @ApiOperation(value = "Obtiene un usuario a partir de su cedula", response = UsuarioDTO.class, tags = "Usuarios")
     @GetMapping("/byCedula/{cedula}")
@@ -175,4 +207,6 @@ public class UsuarioController {
         Optional<UsuarioDTO> usuarioFound = usuarioService.findByCedula(cedula);
         return new ResponseEntity<>(usuarioFound, HttpStatus.OK);
     }
+=======
+>>>>>>> main
 }

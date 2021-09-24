@@ -50,7 +50,13 @@ public class RolServiceImplementation implements IRolService{
     @Override
     @Transactional
     public RolDTO create(RolDTO rolDTO) {
+<<<<<<< HEAD
         return getSavedRolDTO(rolDTO);
+=======
+        Rol rol = MapperUtils.EntityFromDto(rolDTO, Rol.class);
+        rol = rolRepository.save(rol);
+        return MapperUtils.DtoFromEntity(rol, RolDTO.class);
+>>>>>>> main
     }
 
     @Override
