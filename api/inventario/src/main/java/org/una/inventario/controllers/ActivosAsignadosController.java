@@ -7,11 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.una.inventario.dto.ActivoAsignadoDTO;
-import org.una.inventario.dto.ActivoDTO;
 import org.una.inventario.dto.DepartamentoDTO;
-import org.una.inventario.dto.UsuarioDTO;
 import org.una.inventario.services.IActivoAsignadoService;
-import org.una.inventario.services.IDepartamentoService;
 
 import java.util.List;
 import java.util.Optional;
@@ -42,11 +39,11 @@ public class ActivosAsignadosController {
     @ApiOperation(value = "Obtiene un usuario asignado a partir de su id", response = ActivoAsignadoDTO.class, responseContainer = "List", tags = "ActivosAsignados")
     @GetMapping("/usuario/{id}")
     public ResponseEntity<?> findByUsuario(@PathVariable(value = "id") Long id) {
-        Optional<UsuarioDTO> usuarioFound = activoAsignadoService.findByUsuario(id);
+        Optional<List<ActivoAsignadoDTO>> usuarioFound = activoAsignadoService.findByUsuario(id);
         return new ResponseEntity<>(usuarioFound, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Obtiene una lista de activos asignados a partir de su estado", response = DepartamentoDTO.class, responseContainer = "List", tags = "ActivosAsignados")
+    @ApiOperation(value = "Obtiene una lista de activos asignados a partir de su estado", response = ActivoAsignadoDTO.class, responseContainer = "List", tags = "ActivosAsignados")
     @GetMapping("/{estado}")
     public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") Boolean estado) {
         Optional<List<ActivoAsignadoDTO>> result = activoAsignadoService.findByEstado(estado);

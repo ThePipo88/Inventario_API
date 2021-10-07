@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface IContratoGarantiaRepository extends JpaRepository<ContratoGarantia, Long> {
 
-    public List<Activo> findByActivo(Long id);
+    public List<ContratoGarantia> findByActivo(Long id);
 
     public List<ContratoGarantia> findByEstado(boolean estado);
 

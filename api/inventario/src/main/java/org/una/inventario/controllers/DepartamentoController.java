@@ -47,7 +47,7 @@ public class DepartamentoController {
 
 
     @ApiOperation(value = "Obtiene un departamento a partir de su estado", response = DepartamentoDTO.class,responseContainer = "List", tags = "Departamento")
-    @GetMapping("/{estado}")
+    @GetMapping("/findByEstado/{estado}")
     public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") Boolean estado) {
         Optional<List<DepartamentoDTO>> result = departamentoService.findByEstado(estado);
         return new ResponseEntity<>(result, HttpStatus.OK);

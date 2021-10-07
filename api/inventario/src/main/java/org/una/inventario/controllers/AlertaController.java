@@ -24,7 +24,7 @@ public class AlertaController {
     @Autowired
     private IAlertaService alertaService;
 
-    @ApiOperation(value = "Obtiene una lista de todos las alertas", response = ActivoDTO.class, responseContainer = "List", tags = "Alertas")
+    @ApiOperation(value = "Obtiene una lista de todos las alertas", response = AlertaDTO.class, responseContainer = "List", tags = "Alertas")
     @GetMapping()
     public @ResponseBody
     ResponseEntity<?> findAll() {
@@ -32,28 +32,28 @@ public class AlertaController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Obtiene una alerta a partir de su id", response = ActivoDTO.class,  responseContainer = "List", tags = "Alerta")
+    @ApiOperation(value = "Obtiene una alerta a partir de su id", response = AlertaDTO.class,  responseContainer = "List", tags = "Alerta")
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<AlertaDTO> activoFound = alertaService.findById(id);
         return new ResponseEntity<>(activoFound, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Obtiene un activo a partir de su id", response = ActivoDTO.class, tags = "Activo")
+    @ApiOperation(value = "Obtiene una alerta a partir de su id", response = AlertaDTO.class, tags = "Activo")
     @GetMapping("/activo/{id}")
     public ResponseEntity<?> findByActivo(@PathVariable(value = "id") Long id) {
-        Optional<List<ActivoDTO>> activoFound = alertaService.findByActivo(id);
+        Optional<List<AlertaDTO>> activoFound = alertaService.findByActivo(id);
         return new ResponseEntity<>(activoFound, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Obtiene un activo a partir de su nombre", response = ActivoDTO.class, tags = "Alerta")
+    @ApiOperation(value = "Obtiene un activo a partir de su tipo", response = AlertaDTO.class, tags = "Alerta")
     @GetMapping("/nombre/{term}")
     public ResponseEntity<?> findByTipo(@PathVariable(value = "term") String term) {
         Optional<List<AlertaDTO>> result = alertaService.findByTipo(term);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Obtiene una lista de alertas a partir de su estado", response = ActivoDTO.class,responseContainer = "List", tags = "Alertas")
+    @ApiOperation(value = "Obtiene una lista de alertas a partir de su estado", response = AlertaDTO.class,responseContainer = "List", tags = "Alertas")
     @GetMapping("/{estado}")
     public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") Boolean estado) {
         Optional<List<AlertaDTO>> result = alertaService.findByEstado(estado);
@@ -61,7 +61,7 @@ public class AlertaController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @ApiOperation(value = "Se crea una alerta", response = ActivoAsignadoDTO.class, tags = "Activo")
+    @ApiOperation(value = "Se crea una alerta", response = AlertaDTO.class, tags = "Activo")
     @PostMapping("/")
     @ResponseBody
     public ResponseEntity<?> create(@RequestBody AlertaDTO alertaDTO) {
@@ -69,7 +69,7 @@ public class AlertaController {
         return new ResponseEntity<>(alertaCreated, HttpStatus.CREATED);
     }
 
-    @ApiOperation(value = "Se modifica una alerta a partir de su id", response = DepartamentoDTO.class, tags = "Alerta")
+    @ApiOperation(value = "Se modifica una alerta a partir de su id", response = AlertaDTO.class, tags = "Alerta")
     @PutMapping("/{id}")
     @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody AlertaDTO alertaDTO) {
@@ -77,14 +77,14 @@ public class AlertaController {
         return new ResponseEntity<>(alertaUpdated, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Se elimina una alerta a partir de su id", response = DepartamentoDTO.class, tags = "Alerta")
+    @ApiOperation(value = "Se elimina una alerta a partir de su id", response = AlertaDTO.class, tags = "Alerta")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
         alertaService.delete(id);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Se eliminan todas las alertas", response = DepartamentoDTO.class, tags = "Alerta")
+    @ApiOperation(value = "Se eliminan todas las alertas", response = AlertaDTO.class, tags = "Alerta")
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() throws Exception {
         alertaService.deleteAll();

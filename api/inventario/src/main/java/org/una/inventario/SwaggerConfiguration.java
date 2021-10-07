@@ -43,7 +43,6 @@ public class SwaggerConfiguration {
                 .tags(new Tag("Seguridad", "Metodos de Seguridad"),
                         new Tag("Usuarios", "Entidad de Usuarios")
                 );
-
     }
 
 

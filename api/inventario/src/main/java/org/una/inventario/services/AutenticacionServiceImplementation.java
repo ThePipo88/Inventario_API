@@ -42,8 +42,8 @@ public class AutenticacionServiceImplementation implements IAutenticacionService
 
         if (usuario.isPresent() &&  bCryptPasswordEncoder.matches(authenticationRequest.getPassword(),usuario.get().getPasswordEncriptado())) {
             AuthenticationResponse authenticationResponse = new AuthenticationResponse();
-            Authentication authentication = authenticationManager
-                    .authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getCedula(), authenticationRequest.getPassword()));
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getCedula(),
+                    authenticationRequest.getPassword()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
             authenticationResponse.setJwt(jwtProvider.generateToken(authenticationRequest));

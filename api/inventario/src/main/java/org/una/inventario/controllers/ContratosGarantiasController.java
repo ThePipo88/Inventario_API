@@ -36,10 +36,10 @@ public class ContratosGarantiasController {
         return new ResponseEntity<>(contratoGarantiaFound, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Obtiene un activo a partir de su id", response = ActivoDTO.class, tags = "Activo")
+    @ApiOperation(value = "Obtiene un contrato a partir de un id de un activo", response = ActivoDTO.class, tags = "Activo")
     @GetMapping("/activo/{id}")
     public ResponseEntity<?> findByActivo(@PathVariable(value = "id") Long id) {
-        Optional<List<ActivoDTO>> activoFound = contratoGarantiaService.findByActivo(id);
+        Optional<List<ContratoGarantiaDTO>> activoFound = contratoGarantiaService.findByActivo(id);
         return new ResponseEntity<>(activoFound, HttpStatus.OK);
     }
 

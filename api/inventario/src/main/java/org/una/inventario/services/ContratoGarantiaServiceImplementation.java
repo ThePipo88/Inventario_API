@@ -43,9 +43,9 @@ public class ContratoGarantiaServiceImplementation implements IContratoGarantiaS
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<ActivoDTO>> findByActivo(Long id) {
-        List<Activo> activoList = contratoGarantiaRepository.findByActivo(id);
-        List<ActivoDTO> activoDTOList = MapperUtils.DtoListFromEntityList(activoList, ActivoDTO.class);
+    public Optional<List<ContratoGarantiaDTO>> findByActivo(Long id) {
+        List<ContratoGarantia> activoList = contratoGarantiaRepository.findByActivo(id);
+        List<ContratoGarantiaDTO> activoDTOList = MapperUtils.DtoListFromEntityList(activoList, ContratoGarantiaDTO.class);
         return Optional.ofNullable(activoDTOList);
     }
 

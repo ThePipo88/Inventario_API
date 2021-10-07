@@ -13,10 +13,9 @@ public interface IActivoAsignadoService {
     public Optional<List<ActivoAsignadoDTO>> findAll();
 
     public Optional<ActivoAsignadoDTO> findById(Long id);
+    public Optional <List<ActivoAsignadoDTO>> findByUsuario(Long id);
 
-    public Optional <UsuarioDTO> findByUsuario(Long id);
-
-    public Optional<List<ActivoDTO>> findByActivo(Long id);
+    public Optional<List<ActivoAsignadoDTO>> findByActivo(Long id);
 
     public Optional<List<ActivoAsignadoDTO>> findByEstado(boolean estado);
 

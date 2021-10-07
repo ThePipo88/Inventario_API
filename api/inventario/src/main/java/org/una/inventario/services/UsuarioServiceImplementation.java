@@ -60,9 +60,9 @@ public class UsuarioServiceImplementation implements IUsuarioService, UserDetail
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<DepartamentoDTO>> findByDepartamentoId(Long id) {
-        List<Departamento> departamentoList = usuarioRepository.findByDepartamentoId(id);
-        List<DepartamentoDTO> departamentoDTOList = MapperUtils.DtoListFromEntityList(departamentoList, DepartamentoDTO.class);
+    public Optional<List<UsuarioDTO>> findByDepartamentoId(Long id) {
+        List<Usuario> departamentoList = usuarioRepository.findByDepartamentoId(id);
+        List<UsuarioDTO> departamentoDTOList = MapperUtils.DtoListFromEntityList(departamentoList, UsuarioDTO.class);
         return Optional.ofNullable(departamentoDTOList);
     }
 
@@ -155,6 +155,7 @@ public class UsuarioServiceImplementation implements IUsuarioService, UserDetail
         return Optional.ofNullable(usuarioDTOList);
     }
 
+
     @Override
     @Transactional(readOnly = true)
     public Optional<List<UsuarioDTO>> findByCedulaAproximate(String cedula) {
@@ -172,6 +173,7 @@ public class UsuarioServiceImplementation implements IUsuarioService, UserDetail
     }
 
     @Override
+    @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<Usuario> usuarioBuscado = Optional.ofNullable(usuarioRepository.findByCedula(username));
         if (usuarioBuscado.isPresent()) {

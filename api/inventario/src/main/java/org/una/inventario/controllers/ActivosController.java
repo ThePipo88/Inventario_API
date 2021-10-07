@@ -59,24 +59,24 @@ public class ActivosController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Obtiene una lista de categorias a partir de su id", response = ActivoDTO.class, responseContainer = "List", tags = "Categoria")
+    @ApiOperation(value = "Obtiene una lista de activos a partir de su categoria", response = ActivoDTO.class, responseContainer = "List", tags = "Categoria")
     @GetMapping("/{categoria}")
     public ResponseEntity<?> findByCategoria(@PathVariable(value = "categoria") Long categoria) {
-        Optional<List<CategoriaDTO>> result = activoService.findByCategoria(categoria);
+        Optional<List<ActivoDTO>> result = activoService.findByCategoria(categoria);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Obtiene una lista de marcas a partir de su id", response = MarcaDTO.class, responseContainer = "List", tags = "Marca")
+    @ApiOperation(value = "Obtiene una lista de activos a partir de su marca", response = MarcaDTO.class, responseContainer = "List", tags = "Marca")
     @GetMapping("/{marca}")
     public ResponseEntity<?> findByMarca(@PathVariable(value = "marca") Long marca) {
-        Optional<List<MarcaDTO>> result = activoService.findByMarca(marca);
+        Optional<List<ActivoDTO>> result = activoService.findByMarca(marca);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Obtiene una proveedores a partir de su id", response = ProveedorDTO.class, responseContainer = "List", tags = "Proveedor")
+    @ApiOperation(value = "Obtiene una lista de activos proveedores a partir de su proveedor", response = ProveedorDTO.class, responseContainer = "List", tags = "Proveedor")
     @GetMapping("/{proveedor}")
     public ResponseEntity<?> findByProveedor(@PathVariable(value = "proveedor") Long proveedor) {
-        Optional<List<ProveedorDTO>> result = activoService.findByProveedor(proveedor);
+        Optional<List<ActivoDTO>> result = activoService.findByProveedor(proveedor);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

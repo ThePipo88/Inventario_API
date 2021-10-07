@@ -19,11 +19,11 @@ public interface IActivoService {
 
     public Optional<List<ActivoDTO>> findByEstado(boolean estado);
 
-    public Optional<List<CategoriaDTO>> findByCategoria(Long id);
+    public Optional<List<ActivoDTO>> findByCategoria(Long id);
 
-    public Optional<List<MarcaDTO>> findByMarca(Long id);
+    public Optional<List<ActivoDTO>> findByMarca(Long id);
 
-    public Optional<List<ProveedorDTO>> findByProveedor(Long proveedor);
+    public Optional<List<ActivoDTO>> findByProveedor(Long proveedor);
 
     public Optional<ActivoDTO> findByContinente(Long id);
 

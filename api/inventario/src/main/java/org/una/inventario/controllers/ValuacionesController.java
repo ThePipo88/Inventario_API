@@ -40,14 +40,14 @@ public class ValuacionesController {
     @ApiOperation(value = "Obtiene una lista de valuaciones a partir de su id", response = ValuacionDTO.class, responseContainer = "List", tags = "Valuaciones")
     @GetMapping("/activo/{id}")
     public ResponseEntity<?> findByActivo(@PathVariable(value = "id") Long id) {
-        Optional<List<ActivoDTO>> activoFound = valuacionService.findByActivo(id);
+        Optional<List<ValuacionDTO>> activoFound = valuacionService.findByActivo(id);
         return new ResponseEntity<>(activoFound, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Obtiene una lista de valuaciones a partir de su id", response = ValuacionDTO.class, responseContainer = "List", tags = "Valuaciones")
     @GetMapping("/inventario/{id}")
     public ResponseEntity<?> findByInventario(@PathVariable(value = "id") Long id) {
-        Optional<List<InventarioDTO>> activoFound = valuacionService.findByInventario(id);
+        Optional<List<ValuacionDTO>> activoFound = valuacionService.findByInventario(id);
         return new ResponseEntity<>(activoFound, HttpStatus.OK);
     }
 

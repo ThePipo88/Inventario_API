@@ -23,20 +23,17 @@ import javax.validation.Valid;
 public class AutenticacionController {
 
     @Autowired
-    private IAutenticacionService auntenticacionService;
+    private IAutenticacionService autenticacionService;
 
     @ApiOperation(value = "Inicio de sesión para conseguir un token de acceso", response = UsuarioDTO.class, tags = "Seguridad")
-    @PostMapping("/login")
+    @PostMapping("")
     @ResponseBody
     public ResponseEntity<?> login(@Valid @RequestBody AuthenticationRequest authenticationRequest, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) { throw new MissingInputsException();  }
         AuthenticationResponse authenticationResponse = new AuthenticationResponse();
-        AuthenticationResponse token = auntenticacionService.login(authenticationRequest);
+        AuthenticationResponse token = autenticacionService.login(authenticationRequest);
         if (token.getJwt() != null) {
-            authenticationResponse.setJwt(token.getJwt());
-            //TODO: Complete this   authenticationResponse.setUsuario(usuario);
-            //TODO: Complete this    authenticationResponse.setPermisos(permisosOtorgados);
-            return new ResponseEntity(authenticationResponse, HttpStatus.OK);
+            return new ResponseEntity(autenticacionService.login(authenticationRequest), HttpStatus.OK);
         } else {
             throw new InvalidCredentialsException();
         }

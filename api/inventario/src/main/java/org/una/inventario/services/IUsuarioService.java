@@ -28,7 +28,7 @@ public interface IUsuarioService {
 
     public Optional<UsuarioDTO> findNombreCompletoWithLikeSQL(@Param("nombreCompleto")String nombreCompleto);
 
-    public Optional<List<DepartamentoDTO>> findByDepartamentoId(Long id);
+    public Optional<List<UsuarioDTO>> findByDepartamentoId(Long id);
 
     public Optional<UsuarioDTO> create(UsuarioDTO usuarioDTO);
 

@@ -15,7 +15,7 @@ public interface IContratoGarantiaService {
 
     public Optional<ContratoGarantiaDTO> findById(Long id);
 
-    public Optional<List<ActivoDTO>> findByActivo(Long id);
+    public Optional<List<ContratoGarantiaDTO>> findByActivo(Long id);
 
     public Optional<List<ContratoGarantiaDTO>> findByEstado(boolean estado);
 

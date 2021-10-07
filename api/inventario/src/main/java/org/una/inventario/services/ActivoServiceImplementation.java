@@ -53,25 +53,25 @@ public class ActivoServiceImplementation implements IActivoService{
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<CategoriaDTO>> findByCategoria(Long id) {
-        List<Categoria> categoriaList = activoRepository.findByCategoria(id);
-        List<CategoriaDTO> categoriaDTOList = MapperUtils.DtoListFromEntityList(categoriaList, CategoriaDTO.class);
+    public Optional<List<ActivoDTO>> findByCategoria(Long id) {
+        List<Activo> categoriaList = activoRepository.findByCategoria(id);
+        List<ActivoDTO> categoriaDTOList = MapperUtils.DtoListFromEntityList(categoriaList, ActivoDTO.class);
         return Optional.ofNullable(categoriaDTOList);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<MarcaDTO>> findByMarca(Long id) {
-        List<Marca> marcaList = activoRepository.findByMarca(id);
-        List<MarcaDTO> marcaDTOList = MapperUtils.DtoListFromEntityList(marcaList, MarcaDTO.class);
+    public Optional<List<ActivoDTO>> findByMarca(Long id) {
+        List<Activo> marcaList = activoRepository.findByMarca(id);
+        List<ActivoDTO> marcaDTOList = MapperUtils.DtoListFromEntityList(marcaList, ActivoDTO.class);
         return Optional.ofNullable(marcaDTOList);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<ProveedorDTO>> findByProveedor(Long proveedor) {
-        List<Proveedor> proveedorList = activoRepository.findByProveedor(proveedor);
-        List<ProveedorDTO> proveedorDTOList = MapperUtils.DtoListFromEntityList(proveedorList, ProveedorDTO.class);
+    public Optional<List<ActivoDTO>> findByProveedor(Long proveedor) {
+        List<Activo> proveedorList = activoRepository.findByProveedor(proveedor);
+        List<ActivoDTO> proveedorDTOList = MapperUtils.DtoListFromEntityList(proveedorList, ActivoDTO.class);
         return Optional.ofNullable(proveedorDTOList);
     }
 

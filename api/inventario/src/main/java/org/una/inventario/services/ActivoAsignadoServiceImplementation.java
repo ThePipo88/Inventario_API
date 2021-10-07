@@ -37,17 +37,17 @@ public class ActivoAsignadoServiceImplementation implements IActivoAsignadoServi
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<UsuarioDTO> findByUsuario(Long id) {
-        Usuario usuario = activoAsignadoRepository.findByUsuario(id);
-        UsuarioDTO usuarioDTO = MapperUtils.DtoFromEntity(usuario, UsuarioDTO.class);
-        return Optional.ofNullable(usuarioDTO);
+    public Optional<List<ActivoAsignadoDTO>> findByUsuario(Long id) {
+        List<ActivoAsignado> activoList = activoAsignadoRepository.findByUsuario(id);
+        List<ActivoAsignadoDTO> activoAsignado = MapperUtils.DtoListFromEntityList(activoList , ActivoAsignadoDTO.class);
+        return Optional.ofNullable(activoAsignado);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<ActivoDTO>> findByActivo(Long id) {
-        List<Activo> activoList = activoAsignadoRepository.findByActivo(id);
-        List<ActivoDTO> activoDTOList = MapperUtils.DtoListFromEntityList(activoList, ActivoDTO.class);
+    public Optional<List<ActivoAsignadoDTO>> findByActivo(Long id) {
+        List<ActivoAsignado> activoList = activoAsignadoRepository.findByActivo(id);
+        List<ActivoAsignadoDTO> activoDTOList = MapperUtils.DtoListFromEntityList(activoList, ActivoAsignadoDTO.class);
         return Optional.ofNullable(activoDTOList);
     }
 
