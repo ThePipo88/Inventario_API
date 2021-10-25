@@ -26,36 +26,56 @@ public class ValuacionesController {
     @GetMapping()
     public @ResponseBody
     ResponseEntity<?> findAll() {
-        Optional<List<ValuacionDTO>> result = valuacionService.findAll();
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        try {
+            Optional<List<ValuacionDTO>> result = valuacionService.findAll();
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Obtiene una valuacion a partir de su id", response = ValuacionDTO.class,  responseContainer = "List", tags = "Valuacion")
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
-        Optional<ValuacionDTO> activoFound = valuacionService.findById(id);
-        return new ResponseEntity<>(activoFound, HttpStatus.OK);
+        try {
+            Optional<ValuacionDTO> activoFound = valuacionService.findById(id);
+            return new ResponseEntity<>(activoFound, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Obtiene una lista de valuaciones a partir de su id", response = ValuacionDTO.class, responseContainer = "List", tags = "Valuaciones")
     @GetMapping("/activo/{id}")
     public ResponseEntity<?> findByActivo(@PathVariable(value = "id") Long id) {
-        Optional<List<ValuacionDTO>> activoFound = valuacionService.findByActivo(id);
-        return new ResponseEntity<>(activoFound, HttpStatus.OK);
+        try {
+            Optional<List<ValuacionDTO>> activoFound = valuacionService.findByActivo(id);
+            return new ResponseEntity<>(activoFound, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Obtiene una lista de valuaciones a partir de su id", response = ValuacionDTO.class, responseContainer = "List", tags = "Valuaciones")
     @GetMapping("/inventario/{id}")
     public ResponseEntity<?> findByInventario(@PathVariable(value = "id") Long id) {
-        Optional<List<ValuacionDTO>> activoFound = valuacionService.findByInventario(id);
-        return new ResponseEntity<>(activoFound, HttpStatus.OK);
+        try {
+            Optional<List<ValuacionDTO>> activoFound = valuacionService.findByInventario(id);
+            return new ResponseEntity<>(activoFound, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("/byIdAndFecha/{endDate}")
     @ApiOperation(value = "Obtiene una lista de valuaciones de acuerdo al usuario y fecha de creacion", response = ValuacionDTO.class, responseContainer = "List", tags = "Valuaciones")
     public ResponseEntity<?> findByFechaCreacion(@PathVariable(value = "startDate") Date startDate) {
-        Optional<List<ValuacionDTO>> result = valuacionService.findByFechaCreacion(startDate);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        try {
+            Optional<List<ValuacionDTO>> result = valuacionService.findByFechaCreacion(startDate);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -63,30 +83,46 @@ public class ValuacionesController {
     @PostMapping("/")
     @ResponseBody
     public ResponseEntity<?> create(@RequestBody ValuacionDTO valuacionDTO) {
-        Optional<ValuacionDTO> usuarioCreated = valuacionService.create(valuacionDTO);
-        return new ResponseEntity<>(usuarioCreated, HttpStatus.CREATED);
+        try {
+            Optional<ValuacionDTO> usuarioCreated = valuacionService.create(valuacionDTO);
+            return new ResponseEntity<>(usuarioCreated, HttpStatus.CREATED);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Se modifica una valuacion a partir de su id", response = ValuacionDTO.class, tags = "Valuacion")
     @PutMapping("/{id}")
     @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody ValuacionDTO valuacionModified) {
-        Optional<ValuacionDTO> usuarioUpdated = valuacionService.update(valuacionModified, id);
-        return new ResponseEntity<>(usuarioUpdated, HttpStatus.OK);
+        try {
+            Optional<ValuacionDTO> usuarioUpdated = valuacionService.update(valuacionModified, id);
+            return new ResponseEntity<>(usuarioUpdated, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 
     @ApiOperation(value = "Se elimina una valuacion a partir de su id", response = ValuacionDTO.class, tags = "Valuacion")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
-        valuacionService.delete(id);
-        return new ResponseEntity<>("Ok", HttpStatus.OK);
+        try {
+            valuacionService.delete(id);
+            return new ResponseEntity<>("Ok", HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Se eliminan todos las valuaciones", response = ValuacionDTO.class, tags = "valuacion")
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() throws Exception {
-        valuacionService.deleteAll();
-        return new ResponseEntity<>("Ok", HttpStatus.OK);
+        try {
+            valuacionService.deleteAll();
+            return new ResponseEntity<>("Ok", HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
