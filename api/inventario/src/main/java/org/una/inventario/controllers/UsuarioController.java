@@ -40,7 +40,7 @@ public class UsuarioController {
 
     @ApiOperation(value = "Obtiene una usuario a partir de su id", response = UsuarioDTO.class, tags = "Usuario")
     @GetMapping("/byId/{id}")
-    //@PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<UsuarioDTO> usuarioFound = usuarioService.findById(id);
         return new ResponseEntity<>(usuarioFound, HttpStatus.OK);
@@ -87,7 +87,6 @@ public class UsuarioController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    //Duda en este metodo
     @ApiOperation(value = "Obtiene una usuario comparando su nombre", response = UsuarioDTO.class, tags = "Usuario")
     @GetMapping("/nombreC/{term}")
     @PreAuthorize("hasRole('USUARIO')")

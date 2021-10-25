@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class CustomAccessDeniedHandler  implements AccessDeniedHandler {
+
     @Override
     @SneakyThrows
     public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AccessDeniedException arg2)
