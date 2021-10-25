@@ -27,30 +27,46 @@ public class DepartamentoController {
     @GetMapping()
     public @ResponseBody
     ResponseEntity<?> findAll() {
-        Optional<List<DepartamentoDTO>> result = departamentoService.findAll();
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        try {
+            Optional<List<DepartamentoDTO>> result = departamentoService.findAll();
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Obtiene un departamento a partir de su id", response = DepartamentoDTO.class,  responseContainer = "List", tags = "Departamento")
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
-        Optional<DepartamentoDTO> departamentoFound = departamentoService.findById(id);
-        return new ResponseEntity<>(departamentoFound, HttpStatus.OK);
+        try {
+            Optional<DepartamentoDTO> departamentoFound = departamentoService.findById(id);
+            return new ResponseEntity<>(departamentoFound, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Obtiene un departamento a partir de su nombre", response = DepartamentoDTO.class, tags = "Departamento")
     @GetMapping("/nombre/{term}")
     public ResponseEntity<?> findByNombreContainingAproximateIgnoreCase(@PathVariable(value = "term") String term) {
-        Optional<List<DepartamentoDTO>> result = departamentoService.findByNombreContainingAproximateIgnoreCase(term);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        try {
+            Optional<List<DepartamentoDTO>> result = departamentoService.findByNombreContainingAproximateIgnoreCase(term);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 
     @ApiOperation(value = "Obtiene un departamento a partir de su estado", response = DepartamentoDTO.class,responseContainer = "List", tags = "Departamento")
     @GetMapping("/findByEstado/{estado}")
     public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") Boolean estado) {
-        Optional<List<DepartamentoDTO>> result = departamentoService.findByEstado(estado);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        try {
+            Optional<List<DepartamentoDTO>> result = departamentoService.findByEstado(estado);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -58,29 +74,45 @@ public class DepartamentoController {
     @PostMapping("/")
     @ResponseBody
     public ResponseEntity<?> create(@RequestBody DepartamentoDTO departamentoDTO) {
-        Optional<DepartamentoDTO> departamentoCreated = departamentoService.create(departamentoDTO);
-        return new ResponseEntity<>(departamentoCreated, HttpStatus.CREATED);
+        try {
+            Optional<DepartamentoDTO> departamentoCreated = departamentoService.create(departamentoDTO);
+            return new ResponseEntity<>(departamentoCreated, HttpStatus.CREATED);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Se modifica un departamento a partir de su id", response = DepartamentoDTO.class, tags = "Departamento")
     @PutMapping("/{id}")
     @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody DepartamentoDTO departamentoModified) {
-        Optional<DepartamentoDTO> departamentoUpdated = departamentoService.update(departamentoModified, id);
-        return new ResponseEntity<>(departamentoModified, HttpStatus.OK);
+        try {
+            Optional<DepartamentoDTO> departamentoUpdated = departamentoService.update(departamentoModified, id);
+            return new ResponseEntity<>(departamentoModified, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Se elimina un departamento a partir de su id", response = DepartamentoDTO.class, tags = "Departamento")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
-        departamentoService.delete(id);
-        return new ResponseEntity<>("Ok", HttpStatus.OK);
+        try {
+            departamentoService.delete(id);
+            return new ResponseEntity<>("Ok", HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Se eliminan todos los departamentos", response = DepartamentoDTO.class, tags = "Departamento")
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() throws Exception {
-        departamentoService.deleteAll();
-        return new ResponseEntity<>("Ok", HttpStatus.OK);
+        try {
+            departamentoService.deleteAll();
+            return new ResponseEntity<>("Ok", HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

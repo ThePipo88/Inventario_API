@@ -26,36 +26,56 @@ public class ParametrosController {
     @GetMapping()
     public @ResponseBody
     ResponseEntity<?> findAll() {
-        Optional<List<ParametroDTO>> result = parametroService.findAll();
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        try {
+            Optional<List<ParametroDTO>> result = parametroService.findAll();
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Obtiene un parametro a partir de su id", response = ParametroDTO.class,  responseContainer = "List", tags = "Parametro")
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
-        Optional<ParametroDTO> parametroFound = parametroService.findById(id);
-        return new ResponseEntity<>(parametroFound, HttpStatus.OK);
+        try {
+            Optional<ParametroDTO> parametroFound = parametroService.findById(id);
+            return new ResponseEntity<>(parametroFound, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Obtiene un parametro a partir de su id", response = ParametroDTO.class,  responseContainer = "List", tags = "Parametros")
     @GetMapping("/{valor}")
     public ResponseEntity<?> findByValor(@PathVariable(value = "valor") String valor) {
-        Optional<List<ParametroDTO>> valorFound = parametroService.findByValor(valor);
-        return new ResponseEntity<>(valorFound, HttpStatus.OK);
+        try {
+            Optional<List<ParametroDTO>> valorFound = parametroService.findByValor(valor);
+            return new ResponseEntity<>(valorFound, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Obtiene un parametro a partir de su nombre", response = ParametroDTO.class, tags = "Parametros")
     @GetMapping("/nombre/{term}")
     public ResponseEntity<?> findByNombre(@PathVariable(value = "term") String term) {
-        Optional<List<ParametroDTO>> result = parametroService.findByNombre(term);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        try {
+            Optional<List<ParametroDTO>> result = parametroService.findByNombre(term);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Obtiene un parametro a partir de su estado", response = ParametroDTO.class, responseContainer = "List", tags = "Parametros")
     @GetMapping("/{estado}")
     public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") Boolean estado) {
-        Optional<List<ParametroDTO>> result = parametroService.findByEstado(estado);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        try {
+            Optional<List<ParametroDTO>> result = parametroService.findByEstado(estado);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -63,29 +83,45 @@ public class ParametrosController {
     @PostMapping("/")
     @ResponseBody
     public ResponseEntity<?> create(@RequestBody ParametroDTO parametroDTO) {
-        Optional<ParametroDTO> parametroCreated = parametroService.create(parametroDTO);
-        return new ResponseEntity<>(parametroCreated, HttpStatus.CREATED);
+        try {
+            Optional<ParametroDTO> parametroCreated = parametroService.create(parametroDTO);
+            return new ResponseEntity<>(parametroCreated, HttpStatus.CREATED);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Se modifica un parametro a partir de su id", response = ParametroDTO.class, tags = "Parametro")
     @PutMapping("/{id}")
     @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody ParametroDTO parametroDTO) {
-        Optional<ParametroDTO> parametroUpdated = parametroService.update(parametroDTO, id);
-        return new ResponseEntity<>(parametroUpdated, HttpStatus.OK);
+        try {
+            Optional<ParametroDTO> parametroUpdated = parametroService.update(parametroDTO, id);
+            return new ResponseEntity<>(parametroUpdated, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Se elimina un parametro a partir de su id", response = ParametroDTO.class, tags = "Parametro")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
-        parametroService.delete(id);
-        return new ResponseEntity<>("Ok", HttpStatus.OK);
+        try {
+            parametroService.delete(id);
+            return new ResponseEntity<>("Ok", HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Se eliminan todos las parametros", response = ParametroDTO.class, tags = "Parametros")
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() throws Exception {
-        parametroService.deleteAll();
-        return new ResponseEntity<>("Ok", HttpStatus.OK);
+        try {
+            parametroService.deleteAll();
+            return new ResponseEntity<>("Ok", HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

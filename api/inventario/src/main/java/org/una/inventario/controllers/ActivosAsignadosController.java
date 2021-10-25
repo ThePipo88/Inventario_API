@@ -25,29 +25,45 @@ public class ActivosAsignadosController {
     @GetMapping()
     public @ResponseBody
     ResponseEntity<?> findAll() {
-        Optional<List<ActivoAsignadoDTO>> result = activoAsignadoService.findAll();
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        try {
+            Optional<List<ActivoAsignadoDTO>> result = activoAsignadoService.findAll();
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Obtiene un activo asignado a partir de su id", response = ActivoAsignadoDTO.class, responseContainer = "List", tags = "ActivosAsignados")
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
-        Optional<ActivoAsignadoDTO> departamentoFound = activoAsignadoService.findById(id);
-        return new ResponseEntity<>(departamentoFound, HttpStatus.OK);
+        try {
+            Optional<ActivoAsignadoDTO> departamentoFound = activoAsignadoService.findById(id);
+            return new ResponseEntity<>(departamentoFound, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Obtiene un usuario asignado a partir de su id", response = ActivoAsignadoDTO.class, responseContainer = "List", tags = "ActivosAsignados")
     @GetMapping("/usuario/{id}")
     public ResponseEntity<?> findByUsuario(@PathVariable(value = "id") Long id) {
-        Optional<List<ActivoAsignadoDTO>> usuarioFound = activoAsignadoService.findByUsuario(id);
-        return new ResponseEntity<>(usuarioFound, HttpStatus.OK);
+        try {
+            Optional<List<ActivoAsignadoDTO>> usuarioFound = activoAsignadoService.findByUsuario(id);
+            return new ResponseEntity<>(usuarioFound, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Obtiene una lista de activos asignados a partir de su estado", response = ActivoAsignadoDTO.class, responseContainer = "List", tags = "ActivosAsignados")
     @GetMapping("/{estado}")
     public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") Boolean estado) {
-        Optional<List<ActivoAsignadoDTO>> result = activoAsignadoService.findByEstado(estado);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        try {
+            Optional<List<ActivoAsignadoDTO>> result = activoAsignadoService.findByEstado(estado);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -55,29 +71,45 @@ public class ActivosAsignadosController {
     @PostMapping("/")
     @ResponseBody
     public ResponseEntity<?> create(@RequestBody ActivoAsignadoDTO activoAsignadoDTO) {
-        Optional<ActivoAsignadoDTO> activoAsignadoCreated = activoAsignadoService.create(activoAsignadoDTO);
-        return new ResponseEntity<>(activoAsignadoCreated, HttpStatus.CREATED);
+        try {
+            Optional<ActivoAsignadoDTO> activoAsignadoCreated = activoAsignadoService.create(activoAsignadoDTO);
+            return new ResponseEntity<>(activoAsignadoCreated, HttpStatus.CREATED);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Se modifica un activo asignado a partir de su id", response = DepartamentoDTO.class, tags = "ActivoAsignado")
     @PutMapping("/{id}")
     @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody ActivoAsignadoDTO activoAsignadoModified) {
-        Optional<ActivoAsignadoDTO> activoAsignadoUpdated = activoAsignadoService.update(activoAsignadoModified, id);
-        return new ResponseEntity<>(activoAsignadoUpdated, HttpStatus.OK);
+        try {
+            Optional<ActivoAsignadoDTO> activoAsignadoUpdated = activoAsignadoService.update(activoAsignadoModified, id);
+            return new ResponseEntity<>(activoAsignadoUpdated, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Se elimina un activo asignado a partir de su id", response = DepartamentoDTO.class, tags = "ActivoAsignado")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
-        activoAsignadoService.delete(id);
-        return new ResponseEntity<>("Ok", HttpStatus.OK);
+        try {
+            activoAsignadoService.delete(id);
+            return new ResponseEntity<>("Ok", HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Se eliminan todos los activos asignados", response = DepartamentoDTO.class, tags = "ActivoAsignado")
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() throws Exception {
-        activoAsignadoService.deleteAll();
-        return new ResponseEntity<>("Ok", HttpStatus.OK);
+        try {
+            activoAsignadoService.deleteAll();
+            return new ResponseEntity<>("Ok", HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

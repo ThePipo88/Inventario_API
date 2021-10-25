@@ -25,29 +25,45 @@ public class MarcasController {
     @GetMapping()
     public @ResponseBody
     ResponseEntity<?> findAll() {
-        Optional<List<MarcaDTO>> result = marcaService.findAll();
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        try {
+            Optional<List<MarcaDTO>> result = marcaService.findAll();
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Obtiene una marca a partir de su id", response = MarcaDTO.class,  responseContainer = "List", tags = "Marca")
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
-        Optional<MarcaDTO> marcaFound = marcaService.findById(id);
-        return new ResponseEntity<>(marcaFound, HttpStatus.OK);
+        try {
+            Optional<MarcaDTO> marcaFound = marcaService.findById(id);
+            return new ResponseEntity<>(marcaFound, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Obtiene una marca a partir de su nombre", response = MarcaDTO.class, tags = "Marca")
     @GetMapping("/nombre/{term}")
     public ResponseEntity<?> findByNombre(@PathVariable(value = "term") String term) {
-        Optional<List<MarcaDTO>> result = marcaService.findByNombre(term);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        try {
+            Optional<List<MarcaDTO>> result = marcaService.findByNombre(term);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Obtiene una marca a partir de su estado", response = MarcaDTO.class, responseContainer = "List", tags = "Marcas")
     @GetMapping("/{estado}")
     public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") Boolean estado) {
-        Optional<List<MarcaDTO>> result = marcaService.findByEstado(estado);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        try {
+            Optional<List<MarcaDTO>> result = marcaService.findByEstado(estado);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -55,30 +71,46 @@ public class MarcasController {
     @PostMapping("/")
     @ResponseBody
     public ResponseEntity<?> create(@RequestBody MarcaDTO marcaDTO) {
-        Optional<MarcaDTO> marcaCreated = marcaService.create(marcaDTO);
-        return new ResponseEntity<>(marcaCreated, HttpStatus.CREATED);
+        try {
+            Optional<MarcaDTO> marcaCreated = marcaService.create(marcaDTO);
+            return new ResponseEntity<>(marcaCreated, HttpStatus.CREATED);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Se modifica una marca a partir de su id", response = MarcaDTO.class, tags = "Marca")
     @PutMapping("/{id}")
     @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody MarcaDTO marcaDTO) {
-        Optional<MarcaDTO> marcaUpdated = marcaService.update(marcaDTO, id);
-        return new ResponseEntity<>(marcaUpdated, HttpStatus.OK);
+        try {
+            Optional<MarcaDTO> marcaUpdated = marcaService.update(marcaDTO, id);
+            return new ResponseEntity<>(marcaUpdated, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Se elimina un inventario a partir de su id", response = MarcaDTO.class, tags = "Marca")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
-        marcaService.delete(id);
-        return new ResponseEntity<>("Ok", HttpStatus.OK);
+        try {
+            marcaService.delete(id);
+            return new ResponseEntity<>("Ok", HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Se eliminan todos las marcas", response = MarcaDTO.class, tags = "Marca")
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() throws Exception {
-        marcaService.deleteAll();
-        return new ResponseEntity<>("Ok", HttpStatus.OK);
+        try {
+            marcaService.deleteAll();
+            return new ResponseEntity<>("Ok", HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
   }
 

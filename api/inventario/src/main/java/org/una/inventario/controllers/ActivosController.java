@@ -34,57 +34,89 @@ public class ActivosController {
     @GetMapping()
     public @ResponseBody
     ResponseEntity<?> findAll() {
-        Optional<List<ActivoDTO>> result = activoService.findAll();
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        try {
+            Optional<List<ActivoDTO>> result = activoService.findAll();
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Obtiene un activo a partir de su id", response = ActivoDTO.class,  responseContainer = "List", tags = "Activo")
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
-        Optional<ActivoDTO> activoFound = activoService.findById(id);
-        return new ResponseEntity<>(activoFound, HttpStatus.OK);
+        try {
+            Optional<ActivoDTO> activoFound = activoService.findById(id);
+            return new ResponseEntity<>(activoFound, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Obtiene un activo a partir de su nombre", response = ActivoDTO.class, tags = "Activo")
     @GetMapping("/nombre/{term}")
     public ResponseEntity<?> findByNombre(@PathVariable(value = "term") String term) {
-        Optional<List<ActivoDTO>> result = activoService.findByNombre(term);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        try {
+            Optional<List<ActivoDTO>> result = activoService.findByNombre(term);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Obtiene una lista de activos a partir de su estado", response = ActivoDTO.class,responseContainer = "List", tags = "Activo")
     @GetMapping("/{estado}")
     public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") Boolean estado) {
-        Optional<List<ActivoDTO>> result = activoService.findByEstado(estado);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        try {
+            Optional<List<ActivoDTO>> result = activoService.findByEstado(estado);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Obtiene una lista de activos a partir de su categoria", response = ActivoDTO.class, responseContainer = "List", tags = "Categoria")
     @GetMapping("/{categoria}")
     public ResponseEntity<?> findByCategoria(@PathVariable(value = "categoria") Long categoria) {
-        Optional<List<ActivoDTO>> result = activoService.findByCategoria(categoria);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        try {
+            Optional<List<ActivoDTO>> result = activoService.findByCategoria(categoria);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Obtiene una lista de activos a partir de su marca", response = MarcaDTO.class, responseContainer = "List", tags = "Marca")
     @GetMapping("/{marca}")
     public ResponseEntity<?> findByMarca(@PathVariable(value = "marca") Long marca) {
-        Optional<List<ActivoDTO>> result = activoService.findByMarca(marca);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        try {
+            Optional<List<ActivoDTO>> result = activoService.findByMarca(marca);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Obtiene una lista de activos proveedores a partir de su proveedor", response = ProveedorDTO.class, responseContainer = "List", tags = "Proveedor")
     @GetMapping("/{proveedor}")
     public ResponseEntity<?> findByProveedor(@PathVariable(value = "proveedor") Long proveedor) {
-        Optional<List<ActivoDTO>> result = activoService.findByProveedor(proveedor);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        try {
+            Optional<List<ActivoDTO>> result = activoService.findByProveedor(proveedor);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Obtiene un activo dentro de otro a partir de su id", response = ProveedorDTO.class, tags = "Activo")
     @GetMapping("/{continente}")
     public ResponseEntity<?> findByContinente(@PathVariable(value = "continente") Long continente) {
-        Optional<ActivoDTO> result = activoService.findByContinente(continente);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        try {
+            Optional<ActivoDTO> result = activoService.findByContinente(continente);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -92,30 +124,46 @@ public class ActivosController {
     @PostMapping("/")
     @ResponseBody
     public ResponseEntity<?> create(@RequestBody ActivoDTO activoDTO) {
-        Optional<ActivoDTO> activoCreated = activoService.create(activoDTO);
-        return new ResponseEntity<>(activoCreated, HttpStatus.CREATED);
+        try {
+            Optional<ActivoDTO> activoCreated = activoService.create(activoDTO);
+            return new ResponseEntity<>(activoCreated, HttpStatus.CREATED);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Se modifica un activo a partir de su id", response = DepartamentoDTO.class, tags = "Activo")
     @PutMapping("/{id}")
     @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody ActivoDTO activoDTO) {
-        Optional<ActivoDTO> activoUpdated = activoService.update(activoDTO, id);
-        return new ResponseEntity<>(activoUpdated, HttpStatus.OK);
+        try {
+            Optional<ActivoDTO> activoUpdated = activoService.update(activoDTO, id);
+            return new ResponseEntity<>(activoUpdated, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Se elimina un activo a partir de su id", response = DepartamentoDTO.class, tags = "Activo")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
-        activoService.delete(id);
-        return new ResponseEntity<>("Ok", HttpStatus.OK);
+        try {
+            activoService.delete(id);
+            return new ResponseEntity<>("Ok", HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Se eliminan todos los activos", response = DepartamentoDTO.class, tags = "Activo")
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() throws Exception {
-        activoService.deleteAll();
-        return new ResponseEntity<>("Ok", HttpStatus.OK);
+        try {
+            activoService.deleteAll();
+            return new ResponseEntity<>("Ok", HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }

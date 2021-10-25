@@ -26,29 +26,45 @@ public class InventariosController {
     @GetMapping()
     public @ResponseBody
     ResponseEntity<?> findAll() {
-        Optional<List<InventarioDTO>> result = inventarioService.findAll();
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        try {
+            Optional<List<InventarioDTO>> result = inventarioService.findAll();
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Obtiene un inventario a partir de su id", response = InventarioDTO.class,  responseContainer = "List", tags = "Inventario")
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
-        Optional<InventarioDTO> inventarioFound = inventarioService.findById(id);
-        return new ResponseEntity<>(inventarioFound, HttpStatus.OK);
+        try {
+            Optional<InventarioDTO> inventarioFound = inventarioService.findById(id);
+            return new ResponseEntity<>(inventarioFound, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Obtiene un inventario a partir de su estado", response = InventarioDTO.class,responseContainer = "List", tags = "Inventario")
     @GetMapping("/{estado}")
     public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") Boolean estado) {
-        Optional<List<InventarioDTO>> result = inventarioService.findByEstado(estado);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        try {
+            Optional<List<InventarioDTO>> result = inventarioService.findByEstado(estado);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("/byIdAndFecha/{endDate}")
     @ApiOperation(value = "Obtiene una lista de inventarios de acuerdo al usuario y fecha de creacion", response = TransaccionDTO.class, responseContainer = "InventariosDto", tags = "Inventarios")
     public ResponseEntity<?> findByFechaCreacion(@PathVariable(value = "startDate") Date startDate) {
-        Optional<List<InventarioDTO>> result = inventarioService.findByFechaCreacion(startDate);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        try {
+            Optional<List<InventarioDTO>> result = inventarioService.findByFechaCreacion(startDate);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -56,30 +72,46 @@ public class InventariosController {
     @PostMapping("/")
     @ResponseBody
     public ResponseEntity<?> create(@RequestBody InventarioDTO inventarioDTO) {
-        Optional<InventarioDTO> inventarioCreated = inventarioService.create(inventarioDTO);
-        return new ResponseEntity<>(inventarioCreated, HttpStatus.CREATED);
+        try {
+            Optional<InventarioDTO> inventarioCreated = inventarioService.create(inventarioDTO);
+            return new ResponseEntity<>(inventarioCreated, HttpStatus.CREATED);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Se modifica un inventario a partir de su id", response = InventarioDTO.class, tags = "Inventario")
     @PutMapping("/{id}")
     @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody InventarioDTO inventarioDTO) {
-        Optional<InventarioDTO> inventarioUpdated = inventarioService.update(inventarioDTO, id);
-        return new ResponseEntity<>(inventarioUpdated, HttpStatus.OK);
+        try {
+            Optional<InventarioDTO> inventarioUpdated = inventarioService.update(inventarioDTO, id);
+            return new ResponseEntity<>(inventarioUpdated, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Se elimina un inventario a partir de su id", response = InventarioDTO.class, tags = "Inventario")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
-        inventarioService.delete(id);
-        return new ResponseEntity<>("Ok", HttpStatus.OK);
+        try {
+            inventarioService.delete(id);
+            return new ResponseEntity<>("Ok", HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Se eliminan todos los inventarios", response = InventarioDTO.class, tags = "Inventario")
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() throws Exception {
-        inventarioService.deleteAll();
-        return new ResponseEntity<>("Ok", HttpStatus.OK);
+        try {
+            inventarioService.deleteAll();
+            return new ResponseEntity<>("Ok", HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
 

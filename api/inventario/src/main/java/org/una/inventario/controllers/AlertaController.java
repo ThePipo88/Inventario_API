@@ -28,36 +28,56 @@ public class AlertaController {
     @GetMapping()
     public @ResponseBody
     ResponseEntity<?> findAll() {
-        Optional<List<AlertaDTO>> result = alertaService.findAll();
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        try {
+            Optional<List<AlertaDTO>> result = alertaService.findAll();
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Obtiene una alerta a partir de su id", response = AlertaDTO.class,  responseContainer = "List", tags = "Alerta")
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
-        Optional<AlertaDTO> activoFound = alertaService.findById(id);
-        return new ResponseEntity<>(activoFound, HttpStatus.OK);
+        try {
+            Optional<AlertaDTO> activoFound = alertaService.findById(id);
+            return new ResponseEntity<>(activoFound, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Obtiene una alerta a partir de su id", response = AlertaDTO.class, tags = "Activo")
     @GetMapping("/activo/{id}")
     public ResponseEntity<?> findByActivo(@PathVariable(value = "id") Long id) {
-        Optional<List<AlertaDTO>> activoFound = alertaService.findByActivo(id);
-        return new ResponseEntity<>(activoFound, HttpStatus.OK);
+        try {
+            Optional<List<AlertaDTO>> activoFound = alertaService.findByActivo(id);
+            return new ResponseEntity<>(activoFound, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Obtiene un activo a partir de su tipo", response = AlertaDTO.class, tags = "Alerta")
     @GetMapping("/nombre/{term}")
     public ResponseEntity<?> findByTipo(@PathVariable(value = "term") String term) {
-        Optional<List<AlertaDTO>> result = alertaService.findByTipo(term);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        try {
+            Optional<List<AlertaDTO>> result = alertaService.findByTipo(term);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Obtiene una lista de alertas a partir de su estado", response = AlertaDTO.class,responseContainer = "List", tags = "Alertas")
     @GetMapping("/{estado}")
     public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") Boolean estado) {
-        Optional<List<AlertaDTO>> result = alertaService.findByEstado(estado);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        try {
+            Optional<List<AlertaDTO>> result = alertaService.findByEstado(estado);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -65,30 +85,46 @@ public class AlertaController {
     @PostMapping("/")
     @ResponseBody
     public ResponseEntity<?> create(@RequestBody AlertaDTO alertaDTO) {
-        Optional<AlertaDTO> alertaCreated = alertaService.create(alertaDTO);
-        return new ResponseEntity<>(alertaCreated, HttpStatus.CREATED);
+        try {
+            Optional<AlertaDTO> alertaCreated = alertaService.create(alertaDTO);
+            return new ResponseEntity<>(alertaCreated, HttpStatus.CREATED);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Se modifica una alerta a partir de su id", response = AlertaDTO.class, tags = "Alerta")
     @PutMapping("/{id}")
     @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody AlertaDTO alertaDTO) {
-        Optional<AlertaDTO> alertaUpdated = alertaService.update(alertaDTO, id);
-        return new ResponseEntity<>(alertaUpdated, HttpStatus.OK);
+        try {
+            Optional<AlertaDTO> alertaUpdated = alertaService.update(alertaDTO, id);
+            return new ResponseEntity<>(alertaUpdated, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Se elimina una alerta a partir de su id", response = AlertaDTO.class, tags = "Alerta")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
-        alertaService.delete(id);
-        return new ResponseEntity<>("Ok", HttpStatus.OK);
+        try {
+            alertaService.delete(id);
+            return new ResponseEntity<>("Ok", HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Se eliminan todas las alertas", response = AlertaDTO.class, tags = "Alerta")
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() throws Exception {
-        alertaService.deleteAll();
-        return new ResponseEntity<>("Ok", HttpStatus.OK);
+        try {
+            alertaService.deleteAll();
+            return new ResponseEntity<>("Ok", HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }
