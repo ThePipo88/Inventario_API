@@ -28,4 +28,6 @@ public interface IActivoRepository extends JpaRepository<Activo, Long> {
     //@Query("SELECT u FROM Usuario u LEFT JOIN u.departamento d WHERE u.esJefe=1 AND d.id=:id")
     public Activo findByContinente(Long id);
 
+    @Query("SELECT u FROM Activo u WHERE u.fechaCreacion >= :startDate AND u.fechaCreacion <= :endDate")
+    public List<Activo> findByActivoBetweenFecha(@Param("startDate")Date startDate, @Param("endDate")Date endDate);
 }

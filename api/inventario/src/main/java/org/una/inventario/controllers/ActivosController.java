@@ -3,6 +3,7 @@ package org.una.inventario.controllers;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +18,7 @@ import org.una.inventario.repositories.IActivoRepository;
 import org.una.inventario.services.IActivoService;
 import org.una.inventario.utils.MapperUtils;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -102,6 +104,17 @@ public class ActivosController {
     public ResponseEntity<?> findByProveedor(@PathVariable(value = "proveedor") Long proveedor) {
         try {
             Optional<List<ActivoDTO>> result = activoService.findByProveedor(proveedor);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @ApiOperation(value = "Obtiene una lista de activos proveedores a partir de su proveedor", response = ProveedorDTO.class, responseContainer = "List", tags = "Proveedor")
+    @GetMapping("/findByActivoBetweenFecha/{startDate}/{endDate}")
+    public ResponseEntity<?> findByActivoBetweenFecha(@PathVariable(value = "startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate, @PathVariable(value = "endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
+        try {
+            Optional<List<ActivoDTO>> result = activoService.findByActivoBetweenFecha(startDate,endDate);
             return new ResponseEntity<>(result, HttpStatus.OK);
         }  catch(Exception e){
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);

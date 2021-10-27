@@ -9,6 +9,7 @@ import org.una.inventario.exceptions.NotFoundInformationException;
 import org.una.inventario.repositories.IActivoRepository;
 import org.una.inventario.utils.MapperUtils;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -81,6 +82,14 @@ public class ActivoServiceImplementation implements IActivoService{
         Optional<Activo> activo = Optional.ofNullable(activoRepository.findByContinente(id));
         ActivoDTO activoDTO = MapperUtils.DtoFromEntity(activo.get(), ActivoDTO.class);
         return Optional.ofNullable(activoDTO);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<List<ActivoDTO>> findByActivoBetweenFecha(Date startDate, Date endDate) {
+        List<Activo> activoList = activoRepository.findByActivoBetweenFecha(startDate,endDate);
+        List<ActivoDTO> activoDTOList = MapperUtils.DtoListFromEntityList(activoList, ActivoDTO.class);
+        return Optional.ofNullable(activoDTOList);
     }
 
     @Override
