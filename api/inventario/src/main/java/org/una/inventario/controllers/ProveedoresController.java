@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.una.inventario.dto.ActivoDTO;
 import org.una.inventario.dto.CategoriaDTO;
@@ -23,7 +24,7 @@ public class ProveedoresController {
 
     @Autowired
     private IProveedorService proveedorService;
-
+    @PreAuthorize("hasRole('AUDITOR')")
     @ApiOperation(value = "Obtiene una lista de todos las proveedores", response = ProveedorDTO.class, responseContainer = "List", tags = "Proveedores")
     @GetMapping()
     public @ResponseBody
@@ -35,7 +36,7 @@ public class ProveedoresController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @PreAuthorize("hasRole('AUDITOR')")
     @ApiOperation(value = "Obtiene un poveedor a partir de su id", response = ProveedorDTO.class,  responseContainer = "List", tags = "Proveedor")
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
@@ -46,7 +47,7 @@ public class ProveedoresController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @PreAuthorize("hasRole('AUDITOR')")
     @ApiOperation(value = "Obtiene uns lidts de proveedores a partir de su nombre", response = ProveedorDTO.class, tags = "Proveedores")
     @GetMapping("/nombre/{term}")
     public ResponseEntity<?> findByNombre(@PathVariable(value = "term") String term) {
@@ -57,7 +58,7 @@ public class ProveedoresController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @PreAuthorize("hasRole('AUDITOR')")
     @ApiOperation(value = "Obtiene un poveedor a partir de su id", response = ProveedorDTO.class, tags = "Proveedor")
     @GetMapping("/{telefono}")
     public ResponseEntity<?> findByTelefono(@PathVariable(value = "telefono") String telefono) {
@@ -68,7 +69,7 @@ public class ProveedoresController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @PreAuthorize("hasRole('AUDITOR')")
     @ApiOperation(value = "Obtiene un poveedor a partir de su correo", response = ProveedorDTO.class, tags = "Proveedor")
     @GetMapping("/{correo}")
     public ResponseEntity<?> findByCorreo(@PathVariable(value = "correo") String correo) {
@@ -79,7 +80,7 @@ public class ProveedoresController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @PreAuthorize("hasRole('AUDITOR')")
     @ApiOperation(value = "Obtiene una lista de categorias a partir de su estado", response = ProveedorDTO.class, responseContainer = "List", tags = "Proveedores")
     @GetMapping("/{estado}")
     public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") Boolean estado) {
@@ -90,7 +91,7 @@ public class ProveedoresController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @PreAuthorize("hasRole('AUDITOR')")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "Se crea un proveedor", response = ProveedorDTO.class, tags = "Proveedor")
     @PostMapping("/")
@@ -103,7 +104,7 @@ public class ProveedoresController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @PreAuthorize("hasRole('AUDITOR')")
     @ApiOperation(value = "Se modifica un proveedor a partir de su id", response = ProveedorDTO.class, tags = "Proveedor")
     @PutMapping("/{id}")
     @ResponseBody
@@ -115,7 +116,7 @@ public class ProveedoresController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @PreAuthorize("hasRole('AUDITOR')")
     @ApiOperation(value = "Se elimina un proveedor partir de su id", response = ProveedorDTO.class, tags = "Proveedor")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
@@ -126,7 +127,7 @@ public class ProveedoresController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @PreAuthorize("hasRole('AUDITOR')")
     @ApiOperation(value = "Se eliminan todos las proveedores", response = ProveedorDTO.class, tags = "Proveedor")
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() throws Exception {

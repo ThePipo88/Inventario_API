@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.una.inventario.dto.DepartamentoDTO;
 import org.una.inventario.dto.UsuarioDTO;
@@ -22,6 +23,7 @@ public class DepartamentoController {
 
     @Autowired
     private IDepartamentoService departamentoService;
+    @PreAuthorize("hasRole('AUDITOR')")
 
     @ApiOperation(value = "Obtiene una lista de todos los departamentos", response = DepartamentoDTO.class, responseContainer = "List", tags = "Departamentos")
     @GetMapping()
@@ -34,6 +36,7 @@ public class DepartamentoController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @PreAuthorize("hasRole('AUDITOR')")
 
     @ApiOperation(value = "Obtiene un departamento a partir de su id", response = DepartamentoDTO.class,  responseContainer = "List", tags = "Departamento")
     @GetMapping("/{id}")
@@ -45,6 +48,7 @@ public class DepartamentoController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @PreAuthorize("hasRole('AUDITOR')")
 
     @ApiOperation(value = "Obtiene un departamento a partir de su nombre", response = DepartamentoDTO.class, tags = "Departamento")
     @GetMapping("/nombre/{term}")
@@ -57,6 +61,7 @@ public class DepartamentoController {
         }
     }
 
+    @PreAuthorize("hasRole('AUDITOR')")
 
     @ApiOperation(value = "Obtiene un departamento a partir de su estado", response = DepartamentoDTO.class,responseContainer = "List", tags = "Departamento")
     @GetMapping("/findByEstado/{estado}")
@@ -68,6 +73,7 @@ public class DepartamentoController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @PreAuthorize("hasRole('AUDITOR')")
 
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "Se crea un departamento", response = DepartamentoDTO.class, tags = "Departamento")
@@ -81,6 +87,7 @@ public class DepartamentoController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @PreAuthorize("hasRole('AUDITOR')")
 
     @ApiOperation(value = "Se modifica un departamento a partir de su id", response = DepartamentoDTO.class, tags = "Departamento")
     @PutMapping("/{id}")
@@ -93,6 +100,7 @@ public class DepartamentoController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @PreAuthorize("hasRole('AUDITOR')")
 
     @ApiOperation(value = "Se elimina un departamento a partir de su id", response = DepartamentoDTO.class, tags = "Departamento")
     @DeleteMapping("/{id}")
@@ -104,6 +112,7 @@ public class DepartamentoController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @PreAuthorize("hasRole('AUDITOR')")
 
     @ApiOperation(value = "Se eliminan todos los departamentos", response = DepartamentoDTO.class, tags = "Departamento")
     @DeleteMapping("/")
