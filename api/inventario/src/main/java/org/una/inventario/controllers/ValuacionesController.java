@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.una.inventario.dto.*;
 import org.una.inventario.services.IUsuarioService;
@@ -22,7 +21,7 @@ public class ValuacionesController {
 
     @Autowired
     private IValuacionService valuacionService;
-    @PreAuthorize("hasRole('AUDITOR')")
+
     @ApiOperation(value = "Obtiene una lista de todos las valuaciones", response = ValuacionDTO.class, responseContainer = "List", tags = "Valuaciones")
     @GetMapping()
     public @ResponseBody
@@ -34,7 +33,7 @@ public class ValuacionesController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @PreAuthorize("hasRole('AUDITOR')")
+
     @ApiOperation(value = "Obtiene una valuacion a partir de su id", response = ValuacionDTO.class,  responseContainer = "List", tags = "Valuacion")
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
@@ -45,7 +44,6 @@ public class ValuacionesController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @PreAuthorize("hasRole('AUDITOR')")
 
     @ApiOperation(value = "Obtiene una lista de valuaciones a partir de su id", response = ValuacionDTO.class, responseContainer = "List", tags = "Valuaciones")
     @GetMapping("/activo/{id}")
@@ -57,7 +55,6 @@ public class ValuacionesController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @PreAuthorize("hasRole('AUDITOR')")
 
     @ApiOperation(value = "Obtiene una lista de valuaciones a partir de su id", response = ValuacionDTO.class, responseContainer = "List", tags = "Valuaciones")
     @GetMapping("/inventario/{id}")
@@ -69,7 +66,6 @@ public class ValuacionesController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @PreAuthorize("hasRole('AUDITOR')")
 
     @GetMapping("/byIdAndFecha/{endDate}")
     @ApiOperation(value = "Obtiene una lista de valuaciones de acuerdo al usuario y fecha de creacion", response = ValuacionDTO.class, responseContainer = "List", tags = "Valuaciones")
@@ -81,7 +77,6 @@ public class ValuacionesController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @PreAuthorize("hasRole('AUDITOR')")
 
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "Se crea una valuacion", response = ValuacionDTO.class, tags = "Valuacion")
@@ -95,7 +90,6 @@ public class ValuacionesController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @PreAuthorize("hasRole('AUDITOR')")
 
     @ApiOperation(value = "Se modifica una valuacion a partir de su id", response = ValuacionDTO.class, tags = "Valuacion")
     @PutMapping("/{id}")
@@ -109,7 +103,6 @@ public class ValuacionesController {
         }
     }
 
-    @PreAuthorize("hasRole('AUDITOR')")
 
     @ApiOperation(value = "Se elimina una valuacion a partir de su id", response = ValuacionDTO.class, tags = "Valuacion")
     @DeleteMapping("/{id}")
@@ -121,7 +114,6 @@ public class ValuacionesController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @PreAuthorize("hasRole('AUDITOR')")
 
     @ApiOperation(value = "Se eliminan todos las valuaciones", response = ValuacionDTO.class, tags = "valuacion")
     @DeleteMapping("/")
