@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.una.inventario.dto.*;
@@ -110,6 +111,7 @@ public class ActivosController {
         }
     }
 
+    @PreAuthorize("hasRole('AUDITOR')")
     @ApiOperation(value = "Obtiene una lista de activos proveedores a partir de su proveedor", response = ProveedorDTO.class, responseContainer = "List", tags = "Proveedor")
     @GetMapping("/findByActivoBetweenFecha/{startDate}/{endDate}")
     public ResponseEntity<?> findByActivoBetweenFecha(@PathVariable(value = "startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate, @PathVariable(value = "endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
