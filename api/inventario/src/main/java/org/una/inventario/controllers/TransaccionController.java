@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.una.inventario.dto.DepartamentoDTO;
 import org.una.inventario.dto.RolDTO;
@@ -26,7 +27,7 @@ public class TransaccionController {
 
     @Autowired
     private ITransaccionService transaccionService;
-
+    @PreAuthorize("hasRole('AUDITOR')")
     @ApiOperation(value = "Obtiene una transaccion a partir de su id", response = TransaccionDTO.class, tags = "Transacciones")
     @GetMapping("/findById/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
@@ -37,7 +38,7 @@ public class TransaccionController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @PreAuthorize("hasRole('AUDITOR')")
     @GetMapping("/byIdAndFecha/{id}/{startDate}/{endDate}")
     @ApiOperation(value = "Obtiene una lista de transacciones de acuerdo al usuario y fecha de creacion", response = TransaccionDTO.class, responseContainer = "TransaccionDto", tags = "Transacciones")
     public ResponseEntity<?> findByUsuarioIdAndFechaCreacionBetween(@PathVariable(value = "id") Long id, @PathVariable(value = "startDate") Date startDate, @PathVariable(value = "endDate") Date endDate) {
