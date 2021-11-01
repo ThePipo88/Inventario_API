@@ -25,29 +25,45 @@ public class CategoriasController {
     @GetMapping()
     public @ResponseBody
     ResponseEntity<?> findAll() {
-        Optional<List<CategoriaDTO>> result = categoriaService.findAll();
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        try {
+            Optional<List<CategoriaDTO>> result = categoriaService.findAll();
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Obtiene una categoria a partir de su id", response = ActivoDTO.class,  responseContainer = "List", tags = "Categoria")
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
-        Optional<CategoriaDTO> categoriaFound = categoriaService.findById(id);
-        return new ResponseEntity<>(categoriaFound, HttpStatus.OK);
+        try {
+            Optional<CategoriaDTO> categoriaFound = categoriaService.findById(id);
+            return new ResponseEntity<>(categoriaFound, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Obtiene una categoria a partir de su nombre", response = ActivoDTO.class, tags = "Categoria")
     @GetMapping("/nombre/{term}")
     public ResponseEntity<?> findByNombre(@PathVariable(value = "term") String term) {
-        Optional<List<CategoriaDTO>> result = categoriaService.findByNombre(term);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        try {
+            Optional<List<CategoriaDTO>> result = categoriaService.findByNombre(term);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Obtiene una lista de categorias a partir de su estado", response = ActivoDTO.class, responseContainer = "List", tags = "Categorias")
     @GetMapping("/{estado}")
     public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") Boolean estado) {
-        Optional<List<CategoriaDTO>> result = categoriaService.findByEstado(estado);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        try {
+            Optional<List<CategoriaDTO>> result = categoriaService.findByEstado(estado);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -55,29 +71,45 @@ public class CategoriasController {
     @PostMapping("/")
     @ResponseBody
     public ResponseEntity<?> create(@RequestBody CategoriaDTO categoriaDTO) {
-        Optional<CategoriaDTO> categoriaCreated = categoriaService.create(categoriaDTO);
-        return new ResponseEntity<>(categoriaCreated, HttpStatus.CREATED);
+        try {
+            Optional<CategoriaDTO> categoriaCreated = categoriaService.create(categoriaDTO);
+            return new ResponseEntity<>(categoriaCreated, HttpStatus.CREATED);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Se modifica una categoria a partir de su id", response = DepartamentoDTO.class, tags = "Categoria")
     @PutMapping("/{id}")
     @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody CategoriaDTO categoriaDTO) {
-        Optional<CategoriaDTO> categoriaUpdated = categoriaService.update(categoriaDTO, id);
-        return new ResponseEntity<>(categoriaUpdated, HttpStatus.OK);
+        try {
+            Optional<CategoriaDTO> categoriaUpdated = categoriaService.update(categoriaDTO, id);
+            return new ResponseEntity<>(categoriaUpdated, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Se elimina una categoria a partir de su id", response = DepartamentoDTO.class, tags = "Categoria")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
-        categoriaService.delete(id);
-        return new ResponseEntity<>("Ok", HttpStatus.OK);
+        try {
+            categoriaService.delete(id);
+            return new ResponseEntity<>("Ok", HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Se eliminan todas las categorias", response = DepartamentoDTO.class, tags = "Categorias")
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() throws Exception {
-        categoriaService.deleteAll();
-        return new ResponseEntity<>("Ok", HttpStatus.OK);
+        try {
+            categoriaService.deleteAll();
+            return new ResponseEntity<>("Ok", HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

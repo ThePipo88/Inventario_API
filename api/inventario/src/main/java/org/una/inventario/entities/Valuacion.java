@@ -8,7 +8,6 @@ import java.util.Date;
 
 @Entity
 @Table(name = "valuaciones")
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

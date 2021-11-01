@@ -15,9 +15,9 @@ public interface IValuacionService {
 
     public Optional<ValuacionDTO> findById(Long id);
 
-    public Optional<List<ActivoDTO>> findByActivo(Long id);
+    public Optional<List<ValuacionDTO>> findByActivo(Long id);
 
-    public Optional<List<InventarioDTO>> findByInventario(Long id);
+    public Optional<List<ValuacionDTO>> findByInventario(Long id);
 
     public Optional<List<ValuacionDTO>> findByFechaCreacion(Date startDate);
 

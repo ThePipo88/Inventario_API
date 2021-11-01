@@ -23,7 +23,7 @@ public interface IUsuarioRepository extends JpaRepository<Usuario, Long> {
 
     public List<Usuario> findByNombreCompletoContainingIgnoreCase(String nombreCompleto);
 
-    public List<Departamento> findByDepartamentoId(Long id);
+    public List<Usuario> findByDepartamentoId(Long id);
 
 <<<<<<< HEAD
 
@@ -31,7 +31,6 @@ public interface IUsuarioRepository extends JpaRepository<Usuario, Long> {
 >>>>>>> main
     @Query("SELECT u FROM Usuario u LEFT JOIN u.departamento d WHERE u.esJefe=1 AND d.id=:id")
     public Usuario findJefeByDepartamento(Long id);
-
 
     @Query("select u from Usuario u where UPPER(u.nombreCompleto) like CONCAT('%',UPPER(:nombreCompleto),'%')")
     public Usuario findNombreCompletoWithLikeSQL(@Param("nombreCompleto")String nombreCompleto);

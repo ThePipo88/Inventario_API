@@ -13,9 +13,9 @@ import java.util.List;
 @Repository
 public interface IValuacionRepository extends JpaRepository<Valuacion, Long> {
 
-    public List<Activo> findByActivo(Long id);
+    public List<Valuacion> findByActivo(Long id);
 
-    public List<Inventario> findByInventario(Long id);
+    public List<Valuacion> findByInventario(Long id);
 
     public List<Valuacion> findByFechaCreacion(Date startDate);
 

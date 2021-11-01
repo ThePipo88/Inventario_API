@@ -40,9 +40,9 @@ public class AlertaServiceImplementation implements IAlertaService{
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<ActivoDTO>> findByActivo(Long id) {
-        List<Activo> activo = alertaRepository.findByActivo(id);
-        List<ActivoDTO> activoDTO = MapperUtils.DtoListFromEntityList(activo, ActivoDTO.class);
+    public Optional<List<AlertaDTO>> findByActivo(Long id) {
+        List<Alerta> activo = alertaRepository.findByActivo(id);
+        List<AlertaDTO> activoDTO = MapperUtils.DtoListFromEntityList(activo, AlertaDTO.class);
         return Optional.ofNullable(activoDTO);
     }
 

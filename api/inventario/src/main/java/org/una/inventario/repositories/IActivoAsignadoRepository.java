@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface IActivoAsignadoRepository extends JpaRepository<ActivoAsignado, Long> {
 
-    public Usuario findByUsuario(Long id);
+    public List<ActivoAsignado> findByUsuario(Long id);
 
-    public List<Activo> findByActivo(Long id);
+    public List<ActivoAsignado> findByActivo(Long id);
 
     public List<ActivoAsignado> findByEstado(boolean estado);
 

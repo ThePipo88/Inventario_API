@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface IAlertaRepository extends JpaRepository<Alerta, Long> {
 
-    public List<Activo> findByActivo(Long id);
+    public List<Alerta> findByActivo(Long id);
 
     public List<Alerta> findByTipo(String tipo);
 

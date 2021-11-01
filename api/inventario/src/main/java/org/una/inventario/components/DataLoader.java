@@ -1,9 +1,5 @@
 package org.una.inventario.components;
 
-<<<<<<< HEAD
-import lombok.Builder;
-=======
->>>>>>> main
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
@@ -17,13 +13,8 @@ import org.una.inventario.services.IRolService;
 import org.una.inventario.services.IUsuarioService;
 
 import java.util.List;
-<<<<<<< HEAD
-import java.util.Optional;
-import java.lang.String;
-=======
 import java.util.Objects;
 import java.util.Optional;
->>>>>>> main
 
 @Component
 public class DataLoader implements ApplicationRunner {
@@ -43,12 +34,6 @@ public class DataLoader implements ApplicationRunner {
     @Autowired
     private IDepartamentoService departamentoService;
 
-<<<<<<< HEAD
-
-    @Override
-    public void run(ApplicationArguments args) {
-        if (usuarioService.findByCedulaAproximate(cedula).isEmpty()) {
-=======
     @Override
     public void run(ApplicationArguments args) {
 
@@ -56,25 +41,16 @@ public class DataLoader implements ApplicationRunner {
         if(usuarioService.findByCedulaAproximate(cedula).get().size() == 0){
             System.out.println("Se metio aqui");
 
->>>>>>> main
-            Optional<DepartamentoDTO> contabilidadDepartamento = departamentoService.create(DepartamentoDTO.builder().nombre("Contabilidad").build());
-            Optional<DepartamentoDTO> cajasDepartamento = departamentoService.create(DepartamentoDTO.builder().nombre("Cajas").build());
-            Optional<DepartamentoDTO> informaticaDepartamento = departamentoService.create(DepartamentoDTO.builder().nombre("Informatica").build());
+            Optional<DepartamentoDTO> contabilidadDepartamento = departamentoService.create(DepartamentoDTO.builder().nombre("Contabilidad").estado(true).build());
+            Optional<DepartamentoDTO> cajasDepartamento = departamentoService.create(DepartamentoDTO.builder().nombre("Cajas").estado(true).build());
+            Optional<DepartamentoDTO> informaticaDepartamento = departamentoService.create(DepartamentoDTO.builder().nombre("Informatica").estado(true).build());
 
-<<<<<<< HEAD
-            Optional<RolDTO> colaboradorRol = Optional.ofNullable(rolService.create(RolDTO.builder().nombre("Colaborador").build()));
-            Optional<RolDTO> auditorRol = Optional.ofNullable(rolService.create(RolDTO.builder().nombre("Auditor").build()));
-            Optional<RolDTO> contadorRol = Optional.ofNullable(rolService.create(RolDTO.builder().nombre("Contador").build()));
-            Optional<RolDTO> usuarioRol = Optional.ofNullable(rolService.create(RolDTO.builder().nombre("Usuario").build()));
-            Optional<RolDTO> administradorRol = Optional.ofNullable(rolService.create(RolDTO.builder().nombre("Administrador").build()));
-=======
-            Optional<RolDTO> colaboradorRol = Optional.ofNullable(rolService.create(RolDTO.builder().nombre(RolesTypes.COLABORADOR.name()).build()));
-            Optional<RolDTO> auditorRol = Optional.ofNullable(rolService.create(RolDTO.builder().nombre(RolesTypes.AUDITOR.name()).build()));
-            Optional<RolDTO> contadorRol = Optional.ofNullable(rolService.create(RolDTO.builder().nombre(RolesTypes.CONTADOR.name()).build()));
-            Optional<RolDTO> usuarioRol = Optional.ofNullable(rolService.create(RolDTO.builder().nombre(RolesTypes.USUARIO.name()).build()));
-            Optional<RolDTO> administradorRol = Optional.ofNullable(rolService.create(RolDTO.builder().nombre(RolesTypes.ADMINISTRADOR.name()).build()));
+            Optional<RolDTO> colaboradorRol = Optional.ofNullable(rolService.create(RolDTO.builder().nombre(RolesTypes.ROLE_COLABORADOR.name()).build()));
+            Optional<RolDTO> auditorRol = Optional.ofNullable(rolService.create(RolDTO.builder().nombre(RolesTypes.ROLE_AUDITOR.name()).build()));
+            Optional<RolDTO> contadorRol = Optional.ofNullable(rolService.create(RolDTO.builder().nombre(RolesTypes.ROLE_CONTADOR.name()).build()));
+            Optional<RolDTO> usuarioRol = Optional.ofNullable(rolService.create(RolDTO.builder().nombre(RolesTypes.ROLE_USUARIO.name()).build()));
+            Optional<RolDTO> administradorRol = Optional.ofNullable(rolService.create(RolDTO.builder().nombre(RolesTypes.ROLE_ADMINISTRADOR.name()).build()));
 
->>>>>>> main
 
             UsuarioDTO cajeroUsuario = UsuarioDTO.builder()
                     .cedula("0123456789")
@@ -101,49 +77,18 @@ public class DataLoader implements ApplicationRunner {
                     .rol(administradorRol.orElseThrow()).build();
             usuarioService.create(administradorUsuario);
 
+            UsuarioDTO auditorUsuario = UsuarioDTO.builder()
+                    .cedula("auditor")
+                    .nombreCompleto("Usuario Auditor")
+                    .passwordEncriptado("Una2021")
+                    .departamento(informaticaDepartamento.orElseThrow())
+                    .rol(auditorRol.orElseThrow()).build();
+            usuarioService.create(auditorUsuario);
+
             System.out.println("Se agrega el usuario inicial a la aplicación");
-<<<<<<< HEAD
-        }else {
-            System.out.println("Se encontro el usuario administrador, continuando...");
-
-            Boolean creadte = false;
-
-            Optional<List<UsuarioDTO>> usuario = usuarioService.findAll();
-
-            for(int i = 0; i < usuario.get().size(); i++){
-                if(!usuario.get().isEmpty()){
-                    if(usuario.get().get(i).getCedula().equals("admin")){
-                        creadte = true;
-                    }
-                }
-
-            }
-
-            if(!creadte)
-            {
-                Optional<DepartamentoDTO> informaticaDepartamento = departamentoService.create(DepartamentoDTO.builder().nombre("Informatica").build());
-                Optional<RolDTO> administradorRol = Optional.ofNullable(rolService.create(RolDTO.builder().nombre("Administrador").build()));
-
-                UsuarioDTO administrador = UsuarioDTO.builder()
-                        .cedula("admin")
-                        .nombreCompleto("Usuario Administrador")
-                        .passwordEncriptado("Una2021")
-                        .rol(administradorRol.orElseThrow()).departamento(informaticaDepartamento.orElseThrow())
-                        .build();
-                usuarioService.create(administrador);
-            }
-            else{
-                System.out.println("Usuario existente");
-            }
-=======
         }else{
             System.out.println("Usuario existente");
->>>>>>> main
         }
     }
 
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> main

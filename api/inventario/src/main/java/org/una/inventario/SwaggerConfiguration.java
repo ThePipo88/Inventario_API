@@ -21,11 +21,7 @@ public class SwaggerConfiguration {
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
-<<<<<<< HEAD
-                .securitySchemes(singletonList(new ApiKey("JWT", "AUTHORIZATION", "HEADER")))
-=======
                 .securitySchemes(singletonList(new ApiKey("JWT","AUTHORIZATION", "HEADER")))
->>>>>>> main
                 .securityContexts(singletonList(
                         SecurityContext.builder()
                                 .securityReferences(
@@ -47,16 +43,9 @@ public class SwaggerConfiguration {
                 .tags(new Tag("Seguridad", "Metodos de Seguridad"),
                         new Tag("Usuarios", "Entidad de Usuarios")
                 );
-
-<<<<<<< HEAD
-
-    }
-
-=======
     }
 
 
->>>>>>> main
     private ApiInfo apiInfo() {
         return new ApiInfo(
                 "Inventario de Activos",

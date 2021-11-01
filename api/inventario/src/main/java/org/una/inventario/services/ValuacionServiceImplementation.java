@@ -44,17 +44,17 @@ public class ValuacionServiceImplementation implements IValuacionService{
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<ActivoDTO>> findByActivo(Long id) {
-        List<Activo> activoList = valuacionRepository.findByActivo(id);
-        List<ActivoDTO> activoDTOList = MapperUtils.DtoListFromEntityList(activoList, ActivoDTO.class);
+    public Optional<List<ValuacionDTO>> findByActivo(Long id) {
+        List<Valuacion> activoList = valuacionRepository.findByActivo(id);
+        List<ValuacionDTO> activoDTOList = MapperUtils.DtoListFromEntityList(activoList, ValuacionDTO.class);
         return Optional.ofNullable(activoDTOList);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<InventarioDTO>> findByInventario(Long id) {
-        List<Inventario> inventarioList = valuacionRepository.findByInventario(id);
-        List<InventarioDTO> inventarioDTOList = MapperUtils.DtoListFromEntityList(inventarioList, InventarioDTO.class);
+    public Optional<List<ValuacionDTO>> findByInventario(Long id) {
+        List<Valuacion> inventarioList = valuacionRepository.findByInventario(id);
+        List<ValuacionDTO> inventarioDTOList = MapperUtils.DtoListFromEntityList(inventarioList, ValuacionDTO.class);
         return Optional.ofNullable(inventarioDTOList);
     }
 

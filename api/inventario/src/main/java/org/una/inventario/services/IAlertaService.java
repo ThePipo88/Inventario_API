@@ -15,7 +15,7 @@ public interface IAlertaService {
 
     public Optional<AlertaDTO> findById(Long id);
 
-    public Optional<List<ActivoDTO>> findByActivo(Long id);
+    public Optional<List<AlertaDTO>> findByActivo(Long id);
 
     public Optional<List<AlertaDTO>> findByTipo(String tipo);
 

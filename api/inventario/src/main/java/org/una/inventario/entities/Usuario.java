@@ -5,7 +5,9 @@ import lombok.*;
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "usuarios")
@@ -36,6 +38,9 @@ public class Usuario implements Serializable {
     @ManyToOne
     @JoinColumn(name="departamentos_id")
     private Departamento departamento;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    private List<Transaccion> tranacciones = new ArrayList<>();
 
     @Column
     private boolean estado;

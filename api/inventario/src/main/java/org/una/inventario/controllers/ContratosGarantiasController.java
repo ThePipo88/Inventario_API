@@ -25,36 +25,56 @@ public class ContratosGarantiasController {
     @GetMapping()
     public @ResponseBody
     ResponseEntity<?> findAll() {
-        Optional<List<ContratoGarantiaDTO>> result = contratoGarantiaService.findAll();
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        try {
+            Optional<List<ContratoGarantiaDTO>> result = contratoGarantiaService.findAll();
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Obtiene un contrato de garantia a partir de su id", response = ActivoDTO.class,  responseContainer = "List", tags = "ContratoGarantia")
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
-        Optional<ContratoGarantiaDTO> contratoGarantiaFound = contratoGarantiaService.findById(id);
-        return new ResponseEntity<>(contratoGarantiaFound, HttpStatus.OK);
+        try {
+            Optional<ContratoGarantiaDTO> contratoGarantiaFound = contratoGarantiaService.findById(id);
+            return new ResponseEntity<>(contratoGarantiaFound, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
-    @ApiOperation(value = "Obtiene un activo a partir de su id", response = ActivoDTO.class, tags = "Activo")
+    @ApiOperation(value = "Obtiene un contrato a partir de un id de un activo", response = ActivoDTO.class, tags = "Activo")
     @GetMapping("/activo/{id}")
     public ResponseEntity<?> findByActivo(@PathVariable(value = "id") Long id) {
-        Optional<List<ActivoDTO>> activoFound = contratoGarantiaService.findByActivo(id);
-        return new ResponseEntity<>(activoFound, HttpStatus.OK);
+        try {
+            Optional<List<ContratoGarantiaDTO>> activoFound = contratoGarantiaService.findByActivo(id);
+            return new ResponseEntity<>(activoFound, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Obtiene una lista de contratos de garantia a partir de su estado", response = ActivoDTO.class,responseContainer = "List", tags = "ContratosGarantias")
     @GetMapping("/{estado}")
     public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") Boolean estado) {
-        Optional<List<ContratoGarantiaDTO>> result = contratoGarantiaService.findByEstado(estado);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        try {
+            Optional<List<ContratoGarantiaDTO>> result = contratoGarantiaService.findByEstado(estado);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Obtiene una lista de costos partir de su costo", response = ActivoDTO.class,responseContainer = "List", tags = "ContratosGarantias")
     @GetMapping("/{costo}")
     public ResponseEntity<?> findByCosto(@PathVariable(value = "costo") double costo) {
-        Optional<List<ContratoGarantiaDTO>> result = contratoGarantiaService.findByCosto(costo);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        try {
+            Optional<List<ContratoGarantiaDTO>> result = contratoGarantiaService.findByCosto(costo);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -62,29 +82,45 @@ public class ContratosGarantiasController {
     @PostMapping("/")
     @ResponseBody
     public ResponseEntity<?> create(@RequestBody ContratoGarantiaDTO contratoGarantiaDTO) {
-        Optional<ContratoGarantiaDTO> contratoCreated = contratoGarantiaService.create(contratoGarantiaDTO);
-        return new ResponseEntity<>(contratoCreated, HttpStatus.CREATED);
+        try {
+            Optional<ContratoGarantiaDTO> contratoCreated = contratoGarantiaService.create(contratoGarantiaDTO);
+            return new ResponseEntity<>(contratoCreated, HttpStatus.CREATED);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Se modifica un contrato de garantia a partir de su id", response = DepartamentoDTO.class, tags = "ContratoGarantia")
     @PutMapping("/{id}")
     @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody ContratoGarantiaDTO contratoGarantiaDTO) {
-        Optional<ContratoGarantiaDTO> contratoCreated = contratoGarantiaService.update(contratoGarantiaDTO, id);
-        return new ResponseEntity<>(contratoCreated, HttpStatus.OK);
+        try {
+            Optional<ContratoGarantiaDTO> contratoCreated = contratoGarantiaService.update(contratoGarantiaDTO, id);
+            return new ResponseEntity<>(contratoCreated, HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Se elimina un contrato de garantia a partir de su id", response = DepartamentoDTO.class, tags = "ContratoGarantia")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
-        contratoGarantiaService.delete(id);
-        return new ResponseEntity<>("Ok", HttpStatus.OK);
+        try {
+            contratoGarantiaService.delete(id);
+            return new ResponseEntity<>("Ok", HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @ApiOperation(value = "Se eliminan todas los contratos de garantias", response = DepartamentoDTO.class, tags = "ContratosGarantias")
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() throws Exception {
-        contratoGarantiaService.deleteAll();
-        return new ResponseEntity<>("Ok", HttpStatus.OK);
+        try {
+            contratoGarantiaService.deleteAll();
+            return new ResponseEntity<>("Ok", HttpStatus.OK);
+        }  catch(Exception e){
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
