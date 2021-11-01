@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.una.inventario.dto.*;
 import org.una.inventario.services.IInventarioService;
@@ -20,7 +21,7 @@ public class MarcasController {
 
     @Autowired
     private IMarcaService marcaService;
-
+    @PreAuthorize("hasRole('AUDITOR')")
     @ApiOperation(value = "Obtiene una lista de todos las marcas", response = MarcaDTO.class, responseContainer = "List", tags = "Marcas")
     @GetMapping()
     public @ResponseBody
@@ -32,7 +33,7 @@ public class MarcasController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @PreAuthorize("hasRole('AUDITOR')")
     @ApiOperation(value = "Obtiene una marca a partir de su id", response = MarcaDTO.class,  responseContainer = "List", tags = "Marca")
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
@@ -43,7 +44,7 @@ public class MarcasController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @PreAuthorize("hasRole('AUDITOR')")
     @ApiOperation(value = "Obtiene una marca a partir de su nombre", response = MarcaDTO.class, tags = "Marca")
     @GetMapping("/nombre/{term}")
     public ResponseEntity<?> findByNombre(@PathVariable(value = "term") String term) {
@@ -54,7 +55,7 @@ public class MarcasController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @PreAuthorize("hasRole('AUDITOR')")
     @ApiOperation(value = "Obtiene una marca a partir de su estado", response = MarcaDTO.class, responseContainer = "List", tags = "Marcas")
     @GetMapping("/{estado}")
     public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") Boolean estado) {
@@ -65,7 +66,7 @@ public class MarcasController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @PreAuthorize("hasRole('AUDITOR')")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "Se crea una marca", response = MarcaDTO.class, tags = "Marca")
     @PostMapping("/")
@@ -78,7 +79,7 @@ public class MarcasController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @PreAuthorize("hasRole('AUDITOR')")
     @ApiOperation(value = "Se modifica una marca a partir de su id", response = MarcaDTO.class, tags = "Marca")
     @PutMapping("/{id}")
     @ResponseBody
@@ -90,7 +91,7 @@ public class MarcasController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @PreAuthorize("hasRole('AUDITOR')")
     @ApiOperation(value = "Se elimina un inventario a partir de su id", response = MarcaDTO.class, tags = "Marca")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
@@ -101,7 +102,7 @@ public class MarcasController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @PreAuthorize("hasRole('AUDITOR')")
     @ApiOperation(value = "Se eliminan todos las marcas", response = MarcaDTO.class, tags = "Marca")
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() throws Exception {

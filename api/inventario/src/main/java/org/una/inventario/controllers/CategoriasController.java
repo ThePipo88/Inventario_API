@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.una.inventario.dto.*;
 import org.una.inventario.services.IAlertaService;
@@ -20,7 +21,7 @@ public class CategoriasController {
 
     @Autowired
     private ICategoriaService categoriaService;
-
+    @PreAuthorize("hasRole('AUDITOR')")
     @ApiOperation(value = "Obtiene una lista de todos las categorias", response = ActivoDTO.class, responseContainer = "List", tags = "Categorias")
     @GetMapping()
     public @ResponseBody
@@ -32,7 +33,7 @@ public class CategoriasController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @PreAuthorize("hasRole('AUDITOR')")
     @ApiOperation(value = "Obtiene una categoria a partir de su id", response = ActivoDTO.class,  responseContainer = "List", tags = "Categoria")
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
@@ -43,7 +44,7 @@ public class CategoriasController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @PreAuthorize("hasRole('AUDITOR')")
     @ApiOperation(value = "Obtiene una categoria a partir de su nombre", response = ActivoDTO.class, tags = "Categoria")
     @GetMapping("/nombre/{term}")
     public ResponseEntity<?> findByNombre(@PathVariable(value = "term") String term) {
@@ -54,7 +55,7 @@ public class CategoriasController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @PreAuthorize("hasRole('AUDITOR')")
     @ApiOperation(value = "Obtiene una lista de categorias a partir de su estado", response = ActivoDTO.class, responseContainer = "List", tags = "Categorias")
     @GetMapping("/{estado}")
     public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") Boolean estado) {
@@ -78,7 +79,7 @@ public class CategoriasController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @PreAuthorize("hasRole('AUDITOR')")
     @ApiOperation(value = "Se modifica una categoria a partir de su id", response = DepartamentoDTO.class, tags = "Categoria")
     @PutMapping("/{id}")
     @ResponseBody
@@ -90,7 +91,7 @@ public class CategoriasController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @PreAuthorize("hasRole('AUDITOR')")
     @ApiOperation(value = "Se elimina una categoria a partir de su id", response = DepartamentoDTO.class, tags = "Categoria")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
@@ -101,7 +102,7 @@ public class CategoriasController {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @PreAuthorize("hasRole('AUDITOR')")
     @ApiOperation(value = "Se eliminan todas las categorias", response = DepartamentoDTO.class, tags = "Categorias")
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() throws Exception {
