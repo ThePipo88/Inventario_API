@@ -30,7 +30,6 @@ public class AutenticacionController {
     @ResponseBody
     public ResponseEntity<?> login(@Valid @RequestBody AuthenticationRequest authenticationRequest, BindingResult bindingResult) {
         try{
-
             if (bindingResult.hasErrors()) { throw new MissingInputsException();  }
             AuthenticationResponse authenticationResponse = new AuthenticationResponse();
             AuthenticationResponse token = autenticacionService.login(authenticationRequest);

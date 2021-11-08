@@ -29,7 +29,6 @@ public class Marca implements Serializable {
 
     @Column(name = "fecha_creacion", updatable = false)
     @Temporal(TemporalType.DATE)
-    @Setter(AccessLevel.NONE)
     private Date fechaCreacion;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "marca")
@@ -39,7 +38,6 @@ public class Marca implements Serializable {
 
     @PrePersist
     public void prePersist() {
-        fechaCreacion = new Date();
     }
 
     @PreUpdate

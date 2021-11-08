@@ -38,7 +38,6 @@ public class Proveedor implements Serializable {
 
     @Column(name = "fecha_creacion", updatable = false)
     @Temporal(TemporalType.DATE)
-    @Setter(AccessLevel.NONE)
     private Date fechaCreacion;
 
     @Column(name = "fecha_modificacion")
@@ -53,7 +52,6 @@ public class Proveedor implements Serializable {
 
     @PrePersist
     public void prePersist() {
-        fechaCreacion = new Date();
         fechaModificacion = new Date();
     }
 

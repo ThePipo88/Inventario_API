@@ -15,6 +15,7 @@ import org.una.inventario.repositories.IInventarioRepository;
 import org.una.inventario.repositories.IMarcaRepository;
 import org.una.inventario.utils.MapperUtils;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,9 +44,9 @@ public class MarcaServiceImplementation implements IMarcaService{
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<MarcaDTO>> findByNombre(String nombre) {
-        List<Marca> marcaList = marcaRepository.findByNombre(nombre);
-        List<MarcaDTO> marcaDTOList = MapperUtils.DtoListFromEntityList(marcaList, MarcaDTO.class);
+    public Optional<MarcaDTO> findByNombre(String nombre) {
+        Marca marcaList = marcaRepository.findByNombre(nombre);
+        MarcaDTO marcaDTOList = MapperUtils.DtoFromEntity(marcaList, MarcaDTO.class);
         return Optional.ofNullable(marcaDTOList);
     }
 

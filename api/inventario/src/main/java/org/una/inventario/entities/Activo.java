@@ -35,7 +35,6 @@ public class Activo implements Serializable {
 
     @Column(name = "fecha_creacion", updatable = false)
     @Temporal(TemporalType.DATE)
-    @Setter(AccessLevel.NONE)
     private Date fechaCreacion;
 
     @Column(name = "fecha_modificacion")
@@ -78,7 +77,6 @@ public class Activo implements Serializable {
 
     @PrePersist
     public void prePersist() {
-        fechaCreacion = new Date();
         fechaModificacion = new Date();
     }
 

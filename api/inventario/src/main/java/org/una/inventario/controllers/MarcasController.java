@@ -48,7 +48,7 @@ public class MarcasController {
     @GetMapping("/nombre/{term}")
     public ResponseEntity<?> findByNombre(@PathVariable(value = "term") String term) {
         try {
-            Optional<List<MarcaDTO>> result = marcaService.findByNombre(term);
+            Optional<MarcaDTO> result = marcaService.findByNombre(term);
             return new ResponseEntity<>(result, HttpStatus.OK);
         }  catch(Exception e){
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);

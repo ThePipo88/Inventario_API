@@ -13,7 +13,7 @@ public interface IMarcaService {
 
     public Optional<MarcaDTO> findById(Long id);
 
-    public Optional <List<MarcaDTO>> findByNombre(String nombre);
+    public Optional <MarcaDTO> findByNombre(String nombre);
 
     public Optional<List<MarcaDTO>> findByEstado(boolean estado);
 

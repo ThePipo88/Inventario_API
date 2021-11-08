@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface IMarcaRepository extends JpaRepository<Marca, Long> {
 
-    public List<Marca> findByNombre(String nombre);
+    public Marca findByNombre(String nombre);
 
     public List<Marca> findByEstado(boolean estado);
 
